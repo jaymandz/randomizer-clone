@@ -1,0 +1,23 @@
+<script type="text/x-template" id="coinFlipTemplate">
+
+<v-btn color="indigo" prepend-icon="mdi-hand-coin"
+  rounded="pill" size="large" @click="flip">Flip a coin</v-btn>
+
+<span v-if="randomNumber" class="text-h4">
+    <template v-if="randomNumber % 2 == 0">Heads</template>
+    <template v-if="randomNumber % 2 == 1">Tails</template>
+</span>
+
+</script>
+
+<script type="text/javascript">
+const CoinFlipComponent = {
+    template: '#coinFlipTemplate',
+    data() { return {
+        randomNumber: null,
+    }},
+    methods: { flip(event) {
+        this.randomNumber = Math.floor(Math.random() * 10)
+    }},
+}
+</script>
