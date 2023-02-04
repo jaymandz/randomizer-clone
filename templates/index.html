@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<title>Randomizer Clone by Jay Mandane</title>
+<link href="https://cdn.jsdelivr.net/npm/vuetify@3.1.3/dist/vuetify.css">
+
+<style type="text/css">
+[v-cloak] { display: none }
+</style>
+
+<body>
+
+<div id="app">
+<div v-cloak>
+
+<div class="container-fluid">
+    <router-view></router-view>
+</div>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-router@4.1.6/dist/vue-router.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@3.1.3/dist/vuetify.js"></script>
+
+<script type="text/javascript">
+const AppVuetify = Vuetify.createVuetify()
+
+const Router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes: [],
+})
+
+const App = Vue.createApp()
+
+App.use(Router)
+App.use(AppVuetify)
+
+const AppInstance = App.mount('#app')
+</script>
+
+</body>
+
+</html>
