@@ -1,9 +1,60 @@
 <script type="text/x-template" id="numberTemplate">
-    <p>Under construction</p>
+
+<v-btn class="rc-floating-btn" color="indigo" prepend-icon="mdi-shuffle"
+  rounded="pill" size="large" @click="generate">Generate numbers</v-btn>
+
+<v-row>
+    <v-col>
+        <v-text-field v-model="min" label="Min:"
+          variant="outlined"></v-text-field>
+    </v-col>
+    <v-col>
+        <v-text-field v-model="max" label="Max:"
+          variant="outlined"></v-text-field>
+    </v-col>
+</v-row>
+
+<p>Number of results: ${numResults}</p>
+<v-slider v-model="numResults" :max="10" :min="1" :step="1">
+    <template #prepend>1</template>
+    <template #append>10</template>
+</v-slider>
+
+<v-card class="rc-content-card">
+    <p>${results}</p>
+</v-card>
+
+<v-snackbar v-model="isMinOrMaxNull">
+    <p>All values must be valid numbers.</p>
+    <template #actions>
+        <v-btn color="info" @click="isMinOrMaxNull = false">Dismiss</v-btn>
+    </template>
+</v-snackbar>
+
 </script>
 
 <script type="text/javascript">
 const NumberComponent = {
     template: '#numberTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        isMinOrMaxNull: false,
+        max: null,
+        min: null,
+        numResults: 1,
+        results: [],
+    }},
+    methods: { generate(event) {
+        this.isMinOrMaxNull = ! this.max || ! this.min
+        if (this.isMinOrMaxNull) return
+
+        this.results = []
+        var difference = this.max - this.min
+        for (var r = 0; r < this.numResults; r++)
+        {
+            var randomNumber = Math.round(Math.random() * difference)
+            this.results.push(randomNumber + parseInt(this.min))
+        }
+    }},
 }
 </script>
