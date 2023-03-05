@@ -20,8 +20,14 @@
     <template #append>10</template>
 </v-slider>
 
-<v-card class="rc-content-card">
-    <p>${results}</p>
+<v-card class="align-center d-flex flex-column justify-center rc-content-card">
+    <v-icon v-if="! results.length" color="grey" icon="mdi-numeric"
+      size="large"></v-icon>
+    <div v-else class="text-center">
+        <p class="text-h5">${results.join(', ')}</p>
+        <p class="text-caption">Sum: ${resultSum}</p>
+        <p class="text-caption">Average: ${resultAverage}</p>
+    </div>
 </v-card>
 
 <v-snackbar v-model="isMinOrMaxNull">
@@ -34,6 +40,18 @@
 </script>
 
 <script type="text/javascript">
+const numberComputed = {
+    resultAverage()
+    {
+        var a = this.resultSum / this.results.length || 0
+        return a.toFixed(2)
+    },
+    resultSum()
+    {
+        return this.results.reduce((t, c) => t + c, 0)
+    },
+}
+
 const NumberComponent = {
     template: '#numberTemplate',
     delimiters: ['${', '}'],
@@ -56,5 +74,6 @@ const NumberComponent = {
             this.results.push(randomNumber + parseInt(this.min))
         }
     }},
+    computed: numberComputed,
 }
 </script>
