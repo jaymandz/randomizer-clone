@@ -1,0 +1,15 @@
+<script type="text/x-template" id="rootBaseTemplate">
+
+<slot name="appBar"></slot>
+
+<v-main class="ma-4">
+    <slot name="rootBody"></slot>
+</v-main>
+
+</script>
+
+<script type="text/javascript">
+const RootBaseComponent = {
+    template: '#rootBaseTemplate',
+}
+</script>

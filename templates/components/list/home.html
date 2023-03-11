@@ -1,18 +1,23 @@
 <script type="text/x-template" id="listTemplate">
 
-<div v-if="lists.length == 0" class="align-center d-flex flex-column justify-center rc-spacious-div">
-    <p>You haven't created any list yet!</p>
-    <v-btn color="indigo" prepend-icon="mdi-plus" rounded="pill" size="large"
-      to="/list/create">Create list</v-btn>
-</div>
-<template v-else>
-    Hehe
+<LevelOneBaseComponent>
+<template #body>
+    <div v-if="lists.length == 0" class="align-center d-flex flex-column justify-center rc-spacious-div">
+        <p class="mb-4">You haven't created any list yet!</p>
+        <v-btn color="indigo" prepend-icon="mdi-plus" rounded="pill" size="large"
+          to="/list/create">Create list</v-btn>
+    </div>
+    <template v-else>
+        Hehe
+    </template>
 </template>
+</LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
 const ListComponent = {
+    components: { LevelOneBaseComponent },
     template: '#listTemplate',
     data() { return {
         lists: [],

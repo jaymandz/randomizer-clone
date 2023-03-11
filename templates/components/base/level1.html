@@ -1,0 +1,47 @@
+<script type="text/x-template" id="levelOneBaseTemplate">
+
+<RootBaseComponent>
+<template #appBar>
+    <v-app-bar color="indigo">
+        <template #prepend>
+            <v-app-bar-nav-icon @click="isDrawerOpen = ! isDrawerOpen"></v-app-bar-nav-icon>
+        </template>
+        <v-app-bar-title>Randomizer Clone</v-app-bar-title>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="isDrawerOpen">
+        <v-list>
+            <v-list-item v-for="i in drawerItems" :title="i.title" :to="i.to"
+              :value="i"></v-list-item>
+        </v-list>
+    </v-navigation-drawer>
+</template>
+
+<template #rootBody>
+    <slot name="body"></slot>
+</template>
+</RootBaseComponent>
+
+</script>
+
+<script type="text/javascript">
+const LevelOneBaseComponent = {
+    components: { RootBaseComponent },
+    template: '#levelOneBaseTemplate',
+    data() { return {
+        drawerItems: [
+            { title: 'Number', to: '/number' },
+            { title: 'Coin flip', to: '/coinFlip' },
+            { title: 'List', to: '/list' },
+            { title: 'Letter', to: '/letter' },
+            { title: 'Color', to: '/color' },
+            { title: 'Password', to: '/password' },
+            { title: 'Dice roll', to: '/diceRoll' },
+            { title: 'Country', to: '/country' },
+            { title: 'Date/time', to: '/dateTime' },
+            { title: 'Chemical element', to: '/chemicalElement' },
+        ],
+        isDrawerOpen: false,
+    }},
+}
+</script>
