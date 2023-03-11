@@ -1,5 +1,8 @@
 <script type="text/x-template" id="numberTemplate">
 
+<LevelOneBaseComponent title="Number">
+<template #body>
+
 <v-btn class="rc-floating-btn" color="indigo" prepend-icon="mdi-shuffle"
   rounded="pill" size="large" @click="generate">Generate numbers</v-btn>
 
@@ -37,6 +40,9 @@
     </template>
 </v-snackbar>
 
+</template>
+</LevelOneBaseComponent>
+
 </script>
 
 <script type="text/javascript">
@@ -53,6 +59,7 @@ const numberComputed = {
 }
 
 const NumberComponent = {
+    components: { LevelOneBaseComponent },
     template: '#numberTemplate',
     delimiters: ['${', '}'],
     data() { return {

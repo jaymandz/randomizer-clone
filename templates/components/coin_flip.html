@@ -1,5 +1,8 @@
 <script type="text/x-template" id="coinFlipTemplate">
 
+<LevelOneBaseComponent title="Coin Flip">
+<template #body>
+
 <v-btn class="rc-floating-btn" color="indigo" prepend-icon="mdi-hand-coin"
   rounded="pill" size="large" @click="flip">Flip a coin</v-btn>
 
@@ -16,10 +19,14 @@
     </template>
 </div>
 
+</template>
+</LevelOneBaseComponent>
+
 </script>
 
 <script type="text/javascript">
 const CoinFlipComponent = {
+    components: { LevelOneBaseComponent },
     template: '#coinFlipTemplate',
     data() { return {
         randomNumber: null,

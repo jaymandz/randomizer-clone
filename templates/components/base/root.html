@@ -1,6 +1,16 @@
 <script type="text/x-template" id="rootBaseTemplate">
 
-<slot name="appBar"></slot>
+<v-app-bar color="indigo">
+    <template #prepend>
+        <slot name="appBarPrepend"></slot>
+    </template>
+    <v-app-bar-title>
+        <slot name="appBarTitle"></slot>
+    </v-app-bar-title>
+    <template #append>
+        <slot name="appBarAppend"></slot>
+    </template>
+</v-app-bar>
 
 <v-main class="ma-4">
     <slot name="rootBody"></slot>

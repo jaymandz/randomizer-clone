@@ -1,23 +1,35 @@
 <script type="text/x-template" id="levelOneBaseTemplate">
 
 <RootBaseComponent>
-<template #appBar>
-    <v-app-bar color="indigo">
-        <template #prepend>
-            <v-app-bar-nav-icon @click="isDrawerOpen = ! isDrawerOpen"></v-app-bar-nav-icon>
-        </template>
-        <v-app-bar-title>Randomizer Clone</v-app-bar-title>
-    </v-app-bar>
+<template #appBarPrepend>
+    <v-app-bar-nav-icon @click="isDrawerOpen = ! isDrawerOpen"></v-app-bar-nav-icon>
+</template>
 
+<template #appBarTitle>${title}</template>
+
+<template #appBarAppend>
+<v-menu>
+    <template #activator="{ props }">
+        <v-btn v-bind="props" icon="mdi-dots-vertical"></v-btn>
+    </template>
+    <v-list>
+        <v-list-item>
+            <v-list-item-title>Settings</v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+            <v-list-item-title>Rate on Google Play</v-list-item-title>
+        </v-list-item>
+    </v-list>
+</v-menu>
+</template>
+
+<template #rootBody>
     <v-navigation-drawer v-model="isDrawerOpen">
         <v-list>
             <v-list-item v-for="i in drawerItems" :title="i.title" :to="i.to"
               :value="i"></v-list-item>
         </v-list>
     </v-navigation-drawer>
-</template>
-
-<template #rootBody>
     <slot name="body"></slot>
 </template>
 </RootBaseComponent>
@@ -27,7 +39,11 @@
 <script type="text/javascript">
 const LevelOneBaseComponent = {
     components: { RootBaseComponent },
+    props: {
+        title: String,
+    },
     template: '#levelOneBaseTemplate',
+    delimiters: ['${', '}'],
     data() { return {
         drawerItems: [
             { title: 'Number', to: '/number' },
