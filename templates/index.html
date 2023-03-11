@@ -12,6 +12,10 @@
     height: calc(100vh - 320px);
 }
 
+.rc-spacious-div {
+    height: calc(100vh - 98px);
+}
+
 .rc-floating-btn {
     bottom: 20px;
     position: absolute;
@@ -54,7 +58,7 @@
 
 {% include 'components/number.html' %}
 {% include 'components/coin_flip.html' %}
-{% include 'components/list.html' %}
+{% include 'components/list/home.html' %}
 {% include 'components/letter.html' %}
 {% include 'components/color.html' %}
 {% include 'components/password.html' %}
@@ -71,6 +75,7 @@ const Router = VueRouter.createRouter({
     routes: [
         { path: '/number', component: NumberComponent },
         { path: '/coinFlip', component: CoinFlipComponent },
+        { path: '/list/create', component: ListCreateComponent },
         { path: '/list', component: ListComponent },
         { path: '/letter', component: LetterComponent },
         { path: '/color', component: ColorComponent },
