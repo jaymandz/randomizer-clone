@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -28,4 +28,20 @@ def index():
 
 @application.get('/_get_all_lists')
 def get_all_lists():
-    return jsonify(db.session.execute(db.select(List)).all())
+    lists = db.session.execute(db.select(List)).scalars()
+    return jsonify([ { 'name': l.name } for l in lists ])
+
+@application.post('/_add_list')
+def add_list():
+    nl = List()
+    nl.name = request.json['name']
+    db.session.add(nl)
+
+    for i in request.json['items']:
+        item = ListItem()
+        item.list_id = nl.id
+        item.body = i
+        db.session.add(item)
+    
+    db.session.commit()
+    return 'ok'
