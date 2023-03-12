@@ -8,10 +8,6 @@
 <style type="text/css">
 [v-cloak] { display: none }
 
-.rc-content-card {
-    height: calc(100vh - 320px);
-}
-
 .rc-list-items-list {
     height: calc(100vh - 252px);
     overflow-y: scroll;
@@ -22,9 +18,14 @@
 }
 
 .rc-floating-btn {
-    bottom: 20px;
+    bottom: 32px;
     position: absolute;
-    right: 20px;
+    right: 32px;
+    z-index: 100;
+}
+
+.rc-y-scroll {
+    overflow-y: scroll;
 }
 </style>
 
