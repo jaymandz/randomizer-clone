@@ -2,14 +2,32 @@
 
 <LevelOneBaseComponent title="List">
 <template #body>
-    <div v-if="lists.length == 0" class="align-center d-flex flex-column justify-center rc-spacious-div">
-        <p class="mb-4">You haven't created any list yet!</p>
-        <v-btn color="indigo" prepend-icon="mdi-plus" rounded="pill" size="large"
-          to="/list/create">Create list</v-btn>
-    </div>
-    <template v-else>
-        Hehe
-    </template>
+
+<div v-if="lists.length == 0" class="align-center d-flex flex-column justify-center rc-spacious-div">
+    <p class="mb-4">You haven't created any list yet!</p>
+    <v-btn color="indigo" prepend-icon="mdi-plus" rounded="pill" size="large"
+      to="/list/create">Create list</v-btn>
+</div>
+
+<template v-else>
+<v-btn class="rc-floating-btn" color="indigo" icon="mdi-plus"
+  to="/list/create"></v-btn>
+<v-text-field label="Search" prepend-inner-icon="mdi-magnify"
+  variant="outlined"></v-text-field>
+
+<div class="rc-y-scroll" style="height: calc(100vh - 174px)">
+<v-list lines="two">
+    <v-list-item v-for="(l, k1) in lists" :active="false"
+      :subtitle="l.items.length+' item'+(l.items.length == 1 ? '' : 's')"
+      :title="l.name" :to="'/list/view/'+l.id" :value="l.name">
+        <template #append>
+            <v-icon icon="mdi-chevron-right"></v-icon>
+        </template>
+    </v-list-item>
+</v-list>
+</div>
+</template>
+
 </template>
 </LevelOneBaseComponent>
 

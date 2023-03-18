@@ -22,20 +22,40 @@ class ListItem(db.Model):
     list_id = db.Column(db.Integer, db.ForeignKey('list.id'))
     body = db.Column(db.String())
 
+def __dict_from_list_result(r):
+    items = db.session.execute(
+        db.select(ListItem).filter_by(list_id=r.id)
+    ).scalars()
+    return {
+        'id': r.id,
+        'name': r.name,
+        'items': [ { 'id': i.id, 'body': i.body } for i in items ],
+    }
+
 @application.get('/')
 def index():
     return render_template('index.html')
 
 @application.get('/_get_all_lists')
 def get_all_lists():
-    lists = db.session.execute(db.select(List)).scalars()
-    return jsonify([ { 'name': l.name } for l in lists ])
+    result = db.session.execute(db.select(List)).scalars()
+    return jsonify([ __dict_from_list_result(r) for r in result ])
+
+@application.get('/_get_list')
+def get_list():
+    result = db.session.execute(
+        db.select(List).filter_by(id=request.args.get('id'))
+    ).scalar_one()
+    return jsonify(__dict_from_list_result(result))
 
 @application.post('/_add_list')
 def add_list():
     nl = List()
     nl.name = request.json['name']
     db.session.add(nl)
+
+    db.session.flush()
+    db.session.refresh(nl)
 
     for i in request.json['items']:
         item = ListItem()

@@ -1,0 +1,27 @@
+<script type="text/x-template" id="listViewTemplate">
+
+<RootBaseComponent>
+
+<template #appBarTitle></template>
+
+</RootBaseComponent>
+
+</script>
+
+<script type="text/javascript">
+const ListViewComponent = {
+    components: { RootBaseComponent },
+    template: '#listViewTemplate',
+    data() { return {
+        list: {},
+    }},
+    mounted()
+    {
+        axios.get('{{ url_for("get_list") }}', { params: {
+            id: this.$route.params.id,
+        }}).then(r => {
+            this.list = r.data
+        })
+    }
+}
+</script>

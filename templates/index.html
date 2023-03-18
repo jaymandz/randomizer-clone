@@ -61,6 +61,7 @@
 {% include 'components/chemical_element.html' %}
 
 {% include 'components/list/create.html' %}
+{% include 'components/list/view.html' %}
 
 <script type="text/javascript">
 const AppVuetify = Vuetify.createVuetify()
@@ -70,8 +71,11 @@ const Router = VueRouter.createRouter({
     routes: [
         { path: '/number', component: NumberComponent },
         { path: '/coinFlip', component: CoinFlipComponent },
+    
+        { path: '/list/view/:id', component: ListViewComponent },
         { path: '/list/create', component: ListCreateComponent },
         { path: '/list', component: ListComponent },
+    
         { path: '/letter', component: LetterComponent },
         { path: '/color', component: ColorComponent },
         { path: '/password', component: PasswordComponent },
