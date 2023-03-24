@@ -2,18 +2,98 @@
 
 <RootBaseComponent>
 
-<template #appBarTitle></template>
+<template #appBarPrepend>
+    <v-app-bar-nav-icon icon="mdi-arrow-left" to="/list"></v-app-bar-nav-icon>
+</template>
+<template #appBarTitle>${list.name}</template>
+<template #appBarAppend>
+    <v-btn icon="mdi-delete-outline" @click="confirmDelete"></v-btn>
+</template>
+
+<template #rootBody>
+<v-window v-model="currentTab">
+    <v-window-item value="element">
+        <p>Number of results: ${numResults}</p>
+        <v-slider v-model="numResults" :max="list.items.length" :min="1" :step="1">
+            <template #prepend>1</template>
+            <template #append>${list.items.length}</template>
+        </v-slider>
+        <v-card class="align-center d-flex flex-column justify-center mb-2 rc-list-view-short-card">
+            <v-icon v-if="results.length == 0" color="grey"
+              icon="mdi-format-list-bulleted-type" size="large"></v-icon>
+            <p v-else class="text-center text-h2">${results.join(', ')}</p>
+            <v-btn color="indigo" prepend-icon="mdi-shuffle" rounded="pill"
+              size="large" @click="generateResults">Pick element</v-btn>
+        </v-card>
+    </v-window-item>
+    <v-window-item value="shuffle">
+        <v-card class="align-center d-flex flex-column justify-center mb-2 rc-list-view-card">
+            <v-icon color="grey" icon="mdi-shuffle-variant"
+              size="large"></v-icon>
+        </v-card>
+    </v-window-item>
+    <v-window-item value="groups">
+        <p>Number of groups: ${numGroups}</p>
+        <v-slider v-model="numGroups" :max="list.items.length" :min="2" :step="1">
+            <template #prepend>2</template>
+            <template #append>${list.items.length}</template>
+        </v-slider>
+        <v-card class="align-center d-flex flex-column justify-center mb-2 rc-list-view-short-card">
+            <v-icon color="grey" icon="mdi-account-multiple-outline"
+              size="large"></v-icon>
+        </v-card>
+    </v-window-item>
+    <v-window-item value="edit">Under construction</v-window-item>
+</v-window>
+
+<v-tabs v-model="currentTab" grow stacked bg-color="indigo">
+    <v-tab value="element">
+        <v-icon icon="mdi-format-list-bulleted-type"></v-icon>
+        Element
+    </v-tab>
+    <v-tab value="shuffle">
+        <v-icon icon="mdi-shuffle-variant"></v-icon>
+        Shuffle
+    </v-tab>
+    <v-tab value="groups">
+        <v-icon icon="mdi-account-multiple"></v-icon>
+        Groups
+    </v-tab>
+    <v-tab value="edit">
+        <v-icon icon="mdi-pencil"></v-icon>
+        Edit
+    </v-tab>
+</v-tabs>
+</template>
 
 </RootBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var listViewMethods = {
+    confirmDelete(event)
+    {
+        //
+    },
+    generateResults(event)
+    {
+        //
+    },
+}
+
 const ListViewComponent = {
     components: { RootBaseComponent },
     template: '#listViewTemplate',
+    delimiters: ['${', '}'],
     data() { return {
-        list: {},
+        currentTab: 'element',
+        list: {
+            items: [],
+        },
+        numGroups: 2,
+        numResults: 1,
+        results: [],
     }},
     mounted()
     {
@@ -22,6 +102,7 @@ const ListViewComponent = {
         }}).then(r => {
             this.list = r.data
         })
-    }
+    },
+    methods: listViewMethods,
 }
 </script>

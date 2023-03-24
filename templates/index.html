@@ -13,6 +13,14 @@
     overflow-y: scroll;
 }
 
+.rc-list-view-card {
+    height: calc(100vh - 176px)
+}
+
+.rc-list-view-short-card {
+    height: calc(100vh - 254px);
+}
+
 .rc-spacious-div {
     height: calc(100vh - 98px);
 }
@@ -34,7 +42,7 @@
 <div id="app">
 <div v-cloak>
 
-<v-app>
+<v-app class="bg-grey-lighten-3">
     <router-view></router-view>
 </v-app>
 
