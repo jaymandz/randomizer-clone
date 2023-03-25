@@ -8,9 +8,12 @@
 <style type="text/css">
 [v-cloak] { display: none }
 
-.rc-list-items-list {
+.rc-list-create-items {
     height: calc(100vh - 252px);
-    overflow-y: scroll;
+}
+
+.rc-list-edit-items {
+    height: calc(100vh - 332px);
 }
 
 .rc-list-view-card {
@@ -21,6 +24,10 @@
     height: calc(100vh - 254px);
 }
 
+.rc-relative {
+    position: relative;
+}
+
 .rc-spacious-div {
     height: calc(100vh - 98px);
 }
@@ -29,6 +36,13 @@
     bottom: 32px;
     position: absolute;
     right: 32px;
+    z-index: 100;
+}
+
+.rc-floating-btn-in-relative {
+    bottom: 16px;
+    position: absolute;
+    right: 16px;
     z-index: 100;
 }
 
@@ -56,6 +70,7 @@
 
 {% include 'components/base/root.html' %}
 {% include 'components/base/level1.html' %}
+{% include 'components/base/list_form.html' %}
 
 {% include 'components/number.html' %}
 {% include 'components/coin_flip.html' %}

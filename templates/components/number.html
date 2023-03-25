@@ -3,9 +3,6 @@
 <LevelOneBaseComponent title="Number">
 <template #body>
 
-<v-btn class="rc-floating-btn" color="indigo" prepend-icon="mdi-shuffle"
-  rounded="pill" size="large" @click="generate">Generate numbers</v-btn>
-
 <v-row>
     <v-col>
         <v-text-field v-model="min" label="Min:"
@@ -23,7 +20,7 @@
     <template #append>10</template>
 </v-slider>
 
-<v-card class="align-center d-flex flex-column justify-center" style="height: calc(100vh - 252px)">
+<v-card class="align-center d-flex flex-column justify-center rc-relative" style="height: calc(100vh - 252px)">
     <v-icon v-if="! results.length" color="grey" icon="mdi-numeric"
       size="large"></v-icon>
     <div v-else class="text-center">
@@ -31,6 +28,9 @@
         <p class="text-caption">Sum: ${resultSum}</p>
         <p class="text-caption">Average: ${resultAverage}</p>
     </div>
+    <v-btn class="rc-floating-btn-in-relative" color="indigo"
+      prepend-icon="mdi-shuffle" rounded="pill" size="large"
+      @click="generate">Generate numbers</v-btn>
 </v-card>
 
 <v-snackbar v-model="isMinOrMaxNull">

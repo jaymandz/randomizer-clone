@@ -12,38 +12,46 @@
 
 <template #rootBody>
 <v-window v-model="currentTab">
-    <v-window-item value="element">
-        <p>Number of results: ${numResults}</p>
-        <v-slider v-model="numResults" :max="list.items.length" :min="1" :step="1">
-            <template #prepend>1</template>
-            <template #append>${list.items.length}</template>
-        </v-slider>
-        <v-card class="align-center d-flex flex-column justify-center mb-2 rc-list-view-short-card">
-            <v-icon v-if="results.length == 0" color="grey"
-              icon="mdi-format-list-bulleted-type" size="large"></v-icon>
-            <p v-else class="text-center text-h2">${results.join(', ')}</p>
-            <v-btn color="indigo" prepend-icon="mdi-shuffle" rounded="pill"
-              size="large" @click="generateResults">Pick element</v-btn>
-        </v-card>
-    </v-window-item>
-    <v-window-item value="shuffle">
-        <v-card class="align-center d-flex flex-column justify-center mb-2 rc-list-view-card">
-            <v-icon color="grey" icon="mdi-shuffle-variant"
-              size="large"></v-icon>
-        </v-card>
-    </v-window-item>
-    <v-window-item value="groups">
-        <p>Number of groups: ${numGroups}</p>
-        <v-slider v-model="numGroups" :max="list.items.length" :min="2" :step="1">
-            <template #prepend>2</template>
-            <template #append>${list.items.length}</template>
-        </v-slider>
-        <v-card class="align-center d-flex flex-column justify-center mb-2 rc-list-view-short-card">
-            <v-icon color="grey" icon="mdi-account-multiple-outline"
-              size="large"></v-icon>
-        </v-card>
-    </v-window-item>
-    <v-window-item value="edit">Under construction</v-window-item>
+<v-window-item value="element">
+    <p>Number of results: ${numResults}</p>
+    <v-slider v-model="numResults" :max="list.items.length" :min="1" :step="1">
+        <template #prepend>1</template>
+        <template #append>${list.items.length}</template>
+    </v-slider>
+    <v-card :class="cardClass(['rc-list-view-short-card'])">
+        <v-icon v-if="results.length == 0" color="grey"
+          icon="mdi-format-list-bulleted-type" size="large"></v-icon>
+        <p v-else class="text-center text-h2">${results.join(', ')}</p>
+        <v-btn class="rc-floating-btn-in-relative" color="indigo"
+          prepend-icon="mdi-shuffle" rounded="pill" size="large"
+          @click="generateResults">Pick element</v-btn>
+    </v-card>
+</v-window-item>
+<v-window-item value="shuffle">
+    <v-card :class="cardClass(['rc-list-view-card'])">
+        <v-icon color="grey" icon="mdi-shuffle-variant" size="large"></v-icon>
+        <v-btn class="rc-floating-btn-in-relative" color="indigo"
+          prepend-icon="mdi-shuffle-variant" rounded="pill" size="large"
+          >Shuffle</v-btn>
+    </v-card>
+</v-window-item>
+<v-window-item value="groups">
+    <p>Number of groups: ${numGroups}</p>
+    <v-slider v-model="numGroups" :max="list.items.length" :min="2" :step="1">
+        <template #prepend>2</template>
+        <template #append>${list.items.length}</template>
+    </v-slider>
+    <v-card :class="cardClass(['rc-list-view-short-card'])">
+        <v-icon color="grey" icon="mdi-account-multiple-outline"
+          size="large"></v-icon>
+        <v-btn class="rc-floating-btn-in-relative" color="indigo"
+          prepend-icon="mdi-account-multiple" rounded="pill" size="large"
+          >Create groups</v-btn>
+    </v-card>
+</v-window-item>
+<v-window-item value="edit">
+    <ListFormComponent mode="edit"></ListFormComponent>
+</v-window-item>
 </v-window>
 
 <v-tabs v-model="currentTab" grow stacked bg-color="indigo">
@@ -72,6 +80,18 @@
 
 <script type="text/javascript">
 var listViewMethods = {
+    cardClass(extraClassArray)
+    {
+        var classes = [
+            'align-center',
+            'd-flex',
+            'flex-column',
+            'justify-center',
+            'mb-2',
+            'rc-relative',
+        ]
+        return classes.concat(extraClassArray).join(' ')
+    },
     confirmDelete(event)
     {
         //
@@ -83,7 +103,10 @@ var listViewMethods = {
 }
 
 const ListViewComponent = {
-    components: { RootBaseComponent },
+    components: {
+        ListFormComponent,
+        RootBaseComponent,
+    },
     template: '#listViewTemplate',
     delimiters: ['${', '}'],
     data() { return {

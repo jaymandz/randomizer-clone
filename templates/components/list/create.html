@@ -13,28 +13,7 @@
 </template>
 
 <template #rootBody>
-    <form id="listForm" @submit.prevent="submitListForm">
-        <v-text-field v-model="listForm.name" required label="List name"
-          variant="outlined"></v-text-field>
-    </form>
-    
-    <form class="d-flex flex-row" @submit.prevent="addNewItem">
-        <v-text-field v-model="newItemContent" required class="mr-2"
-          label="New item" variant="outlined"></v-text-field>
-        <v-btn class="ml-2" color="indigo" prepend-icon="mdi-plus"
-          type="submit" :disabled="newItemContent.length == 0">Add</v-btn>
-    </form>
-
-    <div class="rc-list-items-list">
-        <p class="text-caption">
-            <span v-if="listForm.items.length == 1">1 element</span>
-            <span v-else>${listForm.items.length} elements</span>
-        </p>
-        <v-list>
-            <v-list-item v-for="(i, k1) in listForm.items"
-              :title="i"></v-list-item>
-        </v-list>
-    </div>
+    <ListFormComponent mode="create"></ListFormComponent>
 </template>
 </RootBaseComponent>
 
@@ -59,7 +38,10 @@ const listCreateMethods = {
 }
 
 const ListCreateComponent = {
-    components: { RootBaseComponent },
+    components: {
+        ListFormComponent,
+        RootBaseComponent,
+    },
     template: '#listCreateTemplate',
     delimiters: ['${', '}'],
     data() { return {

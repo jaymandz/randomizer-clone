@@ -3,10 +3,7 @@
 <LevelOneBaseComponent title="Coin Flip">
 <template #body>
 
-<v-btn class="rc-floating-btn" color="indigo" prepend-icon="mdi-hand-coin"
-  rounded="pill" size="large" @click="flip">Flip a coin</v-btn>
-
-<v-card class="align-center d-flex justify-center" style="height: calc(100vh - 96px)">
+<v-card class="align-center d-flex justify-center rc-relative" style="height: calc(100vh - 96px)">
 <div v-if="randomNumber != null" class="ma-16">
     <template v-if="randomNumber % 2 == 0">
         <img src="{{ url_for('static', filename='img/php_coin__heads.jpg')}}"
@@ -20,6 +17,9 @@
     </template>
 </div>
 <v-icon v-else color="grey" icon="mdi-hand-coin" size="large"></v-icon>
+<v-btn class="rc-floating-btn-in-relative" color="indigo"
+  prepend-icon="mdi-hand-coin" rounded="pill" size="large"
+  @click="flip">Flip a coin</v-btn>
 </v-card>
 
 </template>
