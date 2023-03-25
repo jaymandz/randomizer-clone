@@ -8,7 +8,11 @@
       :items="alphabetItems"></v-select>
 
     <v-card :class="cardClass">
-        <p class="text-center text-h2">${generatedLetter}</p>
+        <p v-if="generatedLetter" class="text-center text-h2">
+            ${generatedLetter}
+        </p>
+        <v-icon v-else color="grey" icon="mdi-alphabetical"
+          size="large"></v-icon>
         <v-btn class="rc-floating-btn-in-relative" color="indigo"
           prepend-icon="mdi-shuffle" rounded="pill" size="large"
           @click="generateLetter">Generate letter</v-btn>
