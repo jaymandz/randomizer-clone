@@ -1,14 +1,120 @@
 <script type="text/x-template" id="letterTemplate">
 
 <LevelOneBaseComponent title="Letter">
+<template #body>
+    <v-select v-model="letterForm.case" label="Letter case"
+      :items="letterCaseItems"></v-select>
+    <v-select v-model="letterForm.alphabet" label="Alphabet"
+      :items="alphabetItems"></v-select>
 
+    <v-card :class="cardClass">
+        <p class="text-center text-h2">${generatedLetter}</p>
+        <v-btn class="rc-floating-btn-in-relative" color="indigo"
+          prepend-icon="mdi-shuffle" rounded="pill" size="large"
+          @click="generateLetter">Generate letter</v-btn>
+    </v-card>
+</template>
 </LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var alphabets = {
+    English: {
+        lower: 'abcdefghijklmnopqrstuvwxyz',
+        upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    },
+    French: {
+        lower: 'aàâæbcçdeéèêëfghiîïjklmnoôœpqrstuùûüvwxyÿz',
+        upper: 'AÀÂÆBCÇDEÉÈÊËFGHIÎÏJKLMNOÔŒPQRSTUÙÛÜVWXYŸZ',
+    },
+    German: {
+        lower: 'aäbcdefghijklmnoöpqrsßtuüvwxyz',
+        upper: 'AÄBCDEFGHIJKLMNOÖPQRSẞTUÜVWXYZ',
+    },
+    Greek: {
+        lower: 'αβγδεζηθικλμνξοπρσςτυφχψω',
+        upper: 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ',
+    },
+    Italian: {
+        lower: 'abcdefghilmnopqrstuvz',
+        upper: 'ABCDEFGHILMNOPQRSTUVZ',
+    },
+    Polish: {
+        lower: 'aąbcćdeęfghijklłmnńoóprsśtuwyzźż',
+        upper: 'AĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUWYZŹŻ',
+    },
+    Cyrillic: {
+        // There are a lot of Cyrillic alphabets. The mobile app most likely
+        // used the Russian one, seen below.
+        lower: 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя',
+        upper: 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ',
+    },
+    Spanish: {
+        lower: 'abcdefghijklmnñopqrstuvwxyz',
+        upper: 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ',
+    },
+}
+
+var letterMethods = {
+    generateLetter(event)
+    {
+        var a
+        if (this.letterForm.case == 'both')
+        {
+            a = this.alphabets[this.letterForm.alphabet].upper
+            a = a.concat(this.alphabets[this.letterForm.alphabet].lower)
+        }
+        else
+        {
+            a = this.alphabets[this.letterForm.alphabet][this.letterForm.case]
+        }
+
+        this.generatedLetter = a[Math.floor(Math.random() * a.length)]
+    },
+}
+
+var letterComputed = {
+    cardClass()
+    {
+        return [
+            'align-center',
+            'd-flex',
+            'justify-center',
+            'rc-below-2-controls',
+            'rc-relative',
+        ].join(' ')
+    },
+}
+
 const LetterComponent = {
     components: { LevelOneBaseComponent },
     template: '#letterTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        alphabetItems: [
+            'English',
+            'French',
+            'German',
+            'Greek',
+            'Italian',
+            'Polish',
+            'Cyrillic',
+            'Spanish',
+        ],
+        alphabets,
+        generatedLetter: null,
+        letterCaseItems: [
+            { title: 'Both cases', value: 'both' },
+            { title: 'Uppercase', value: 'upper' },
+            { title: 'Lowercase', value: 'lower' },
+        ],
+        letterForm: {
+            case: 'upper',
+            alphabet: 'English',
+        },
+    }},
+    methods: letterMethods,
+    computed: letterComputed,
 }
 </script>
