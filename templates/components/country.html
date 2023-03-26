@@ -7,6 +7,8 @@
       prepend-icon="mdi-shuffle" rounded="pill" size="large"
       @click="generateCountry">Generate country</v-btn>
     <div v-if="generatedCountry" class="text-center">
+        <v-icon class="rc-copy-icon-in-relative"
+          icon="mdi-content-copy" @click="copyGeneratedCountry"></v-icon>
         <p class="mb-4 text-h2">${generatedCountry.name}</p>
         <a class="text-decoration-none text-indigo" target="_blank"
           :href="generatedCountry.wiki">
@@ -16,6 +18,16 @@
     </div>
     <v-icon v-else color="grey" icon="mdi-earth" size="large"></v-icon>
 </v-card>
+
+<v-snackbar v-model="isGeneratedCountryCopied">
+    <p>Copied to clipboard!</p>
+    <template #actions>
+        <v-btn color="info" @click="isGeneratedCountryCopied = false">
+            Dismiss
+        </v-btn>
+    </template>
+</v-snackbar>
+
 </template>
 </LevelOneBaseComponent>
 
@@ -23,6 +35,11 @@
 
 <script type="text/javascript">
 var countryMethods = {
+    copyGeneratedCountry(event)
+    {
+        navigator.clipboard.writeText(this.generatedCountry.name)
+        this.isGeneratedCountryCopied = true
+    },
     generateCountry(event)
     {
         var index = Math.floor(Math.random() * this.countries.length)
@@ -37,6 +54,7 @@ const CountryComponent = {
     data() { return {
         countries: [],
         generatedCountry: null,
+        isGeneratedCountryCopied: false,
     }},
     mounted()
     {
