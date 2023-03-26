@@ -3,7 +3,7 @@
 <LevelOneBaseComponent title="Coin Flip">
 <template #body>
 
-<v-card class="align-center d-flex justify-center rc-relative" style="height: calc(100vh - 96px)">
+<v-card class="align-center d-flex justify-center rc-full-card rc-relative">
 <div v-if="randomNumber != null" class="ma-16">
     <template v-if="randomNumber % 2 == 0">
         <img src="{{ url_for('static', filename='img/php_coin__heads.jpg')}}"

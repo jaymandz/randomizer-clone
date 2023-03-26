@@ -1,4 +1,4 @@
-import os
+import json, os
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request
@@ -65,3 +65,12 @@ def add_list():
     
     db.session.commit()
     return 'ok'
+
+@application.get('/_get_all_countries')
+def get_all_countries():
+    # Practice good etiquette. Close all files you open.
+    file = open('countries.json', 'r')
+    countries = json.load(file)
+    file.close()
+    # Now send the contents to the client.
+    return jsonify(countries)

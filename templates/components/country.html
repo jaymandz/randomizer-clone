@@ -1,14 +1,49 @@
 <script type="text/x-template" id="countryTemplate">
 
 <LevelOneBaseComponent title="Country">
-
+<template #body>
+<v-card class="align-center d-flex justify-center rc-full-card rc-relative">
+    <v-btn class="rc-floating-btn-in-relative" color="indigo"
+      prepend-icon="mdi-shuffle" rounded="pill" size="large"
+      @click="generateCountry">Generate country</v-btn>
+    <div v-if="generatedCountry" class="text-center">
+        <p class="mb-4 text-h2">${generatedCountry.name}</p>
+        <a class="text-decoration-none text-indigo" target="_blank"
+          :href="generatedCountry.wiki">
+            <v-icon icon="mdi-information" size="x-small"></v-icon>
+            View on Wikipedia
+        </a>
+    </div>
+    <v-icon v-else color="grey" icon="mdi-earth" size="large"></v-icon>
+</v-card>
+</template>
 </LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var countryMethods = {
+    generateCountry(event)
+    {
+        var index = Math.floor(Math.random() * this.countries.length)
+        this.generatedCountry = this.countries[index]
+    },
+}
+
 const CountryComponent = {
     components: { LevelOneBaseComponent },
     template: '#countryTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        countries: [],
+        generatedCountry: null,
+    }},
+    mounted()
+    {
+        axios.get('{{ url_for("get_all_countries") }}').then(r => {
+            this.countries = r.data
+        })
+    },
+    methods: countryMethods,
 }
 </script>
