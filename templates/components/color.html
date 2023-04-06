@@ -1,14 +1,102 @@
 <script type="text/x-template" id="colorTemplate">
 
 <LevelOneBaseComponent title="Color">
+<template #body>
+<v-select v-model="colorType" label="Color type"
+  :items="colorTypeItems"></v-select>
+<v-card :class="cardClass">
+    <v-btn class="rc-floating-btn-in-relative" color="indigo"
+      prepend-icon="mdi-shuffle" rounded="pill" size="large"
+      @click="generateColor">Generate color</v-btn>
+    <div v-if="generatedColor" class="text-center">
+        <v-icon class="rc-copy-icon-in-relative"
+          icon="mdi-content-copy" @click="copyGeneratedColor"></v-icon>
+        <svg width="60" height="60" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="60" height="60" stroke="black"
+              stroke-width="1" :fill="generatedColor.hex()" />
+        </svg>
+        <p class="mt-4 text-h4">${colorRepresentation}</p>
+    </div>
+    <v-icon v-else color="grey" icon="mdi-palette" size="large"></v-icon>
+</v-card>
 
+<v-snackbar v-model="isGeneratedColorCopied">
+    <p>Copied to clipboard!</p>
+    <template #actions>
+        <v-btn color="info" @click="isGeneratedColorCopied = false">
+            Dismiss
+        </v-btn>
+    </template>
+</v-snackbar>
+
+</template>
 </LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var colorMethods = {
+    copyGeneratedColor(event)
+    {
+        navigator.clipboard.writeText(this.colorRepresentation)
+        this.isGeneratedColorCopied = true
+    },
+    generateColor(event)
+    {
+        var colorNum = Math.floor(Math.random() * Math.pow(16, 6))
+        this.generatedColor = chroma(colorNum)
+    },
+}
+
+var colorComputed = {
+    cardClass()
+    {
+        return [
+            'align-center',
+            'd-flex',
+            'justify-center',
+            'rc-below-1-control',
+            'rc-relative',
+        ].join(' ')
+    },
+    colorRepresentation()
+    {
+        if (this.colorType == 'hexa')
+        {
+            return this.generatedColor.hex().toUpperCase()
+        }
+        else if (this.colorType == 'rgb')
+        {
+            var a = this.generatedColor.rgb()
+            return `rgb(${a[0]}, ${a[1]}, ${a[2]})`
+        }
+        else if (this.colorType == 'hsl')
+        {
+            var a = this.generatedColor.hsl()
+            var h = Math.round(a[0])
+            var s = (a[1] * 100).toFixed(1)
+            var l = (a[2] * 100).toFixed(1)
+            return `hsl(${h}, ${s}%, ${l}%)`
+        }
+    }
+}
+
 const ColorComponent = {
     components: { LevelOneBaseComponent },
     template: '#colorTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        colorType: 'hexa',
+        colorTypeItems: [
+            { title: 'Hexadecimal', value: 'hexa' },
+            { title: 'RGB', value: 'rgb' },
+            { title: 'HSL', value: 'hsl' },
+        ],
+        generatedColor: null,
+        isGeneratedColorCopied: false,
+    }},
+    methods: colorMethods,
+    computed: colorComputed,
 }
 </script>
