@@ -1,14 +1,77 @@
 <script type="text/x-template" id="diceRollTemplate">
 
 <LevelOneBaseComponent title="Dice Roll">
+<template #body>
 
+<p>Number of dice: ${numDice}</p>
+<v-slider v-model="numDice" :max="10" :min="1" :step="1">
+    <template #prepend>1</template>
+    <template #append>10</template>
+</v-slider>
+
+<v-card :class="cardClass">
+    <v-icon v-if="! dice.length" color="grey" icon="mdi-dice-multiple"
+      size="large"></v-icon>
+    <div v-else class="text-center">
+        <v-icon v-for="d in dice" size="large" :icon="'mdi-dice-'+d"></v-icon>
+        <div v-if="dice.length > 1">
+            <p class="text-caption">Sum: ${diceSum}</p>
+            <p class="text-caption">Average: ${diceAverage}</p>
+        </div>
+    </div>
+    <v-btn class="rc-floating-btn-in-relative" color="indigo"
+      prepend-icon="mdi-dice-multiple" rounded="pill" size="large"
+      @click="rollDice">Roll the dice</v-btn>
+</v-card>
+
+</template>
 </LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var diceRollMethods = {
+    rollDice(event)
+    {
+        this.dice = []
+        for (var d = 0; d < this.numDice; d++)
+        {
+            this.dice.push(Math.ceil(Math.random() * 6))
+        }
+    },
+}
+
+var diceRollComputed = {
+    cardClass()
+    {
+        return [
+            'align-center',
+            'd-flex',
+            'justify-center',
+            'rc-below-1-control',
+            'rc-relative',
+        ].join(' ')
+    },
+    diceAverage()
+    {
+        var a = this.diceSum / this.dice.length || 0
+        return a.toFixed(2)
+    },
+    diceSum()
+    {
+        return this.dice.reduce((t, d) => t + d, 0)
+    },
+}
+
 const DiceRollComponent = {
     components: { LevelOneBaseComponent },
     template: '#diceRollTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        dice: [],
+        numDice: 1,
+    }},
+    methods: diceRollMethods,
+    computed: diceRollComputed,
 }
 </script>
