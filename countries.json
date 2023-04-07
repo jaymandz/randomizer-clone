@@ -274,5 +274,33 @@
     {
         "name": "Guatemala",
         "wiki": "https://en.wikipedia.org/wiki/Guatemala"
+    },
+    {
+        "name": "Guinea",
+        "wiki": "https://en.wikipedia.org/wiki/Guinea"
+    },
+    {
+        "name": "Guinea-Bissau",
+        "wiki": "https://en.wikipedia.org/wiki/Guinea-Bissau"
+    },
+    {
+        "name": "Guyana",
+        "wiki": "https://en.wikipedia.org/wiki/Guyana"
+    },
+    {
+        "name": "Haiti",
+        "wiki": "https://en.wikipedia.org/wiki/Haiti"
+    },
+    {
+        "name": "Honduras",
+        "wiki": "https://en.wikipedia.org/wiki/Honduras"
+    },
+    {
+        "name": "Hungary",
+        "wiki": "https://en.wikipedia.org/wiki/Hungary"
+    },
+    {
+        "name": "Iceland",
+        "wiki": "https://en.wikipedia.org/wiki/Iceland"
     }
 ]
