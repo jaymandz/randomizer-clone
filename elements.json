@@ -12,6 +12,84 @@
         "wiki": "https://en.wikipedia.org/wiki/Helium"
     },
     {
+        "atomic_num": 3,
+        "symbol": "Li",
+        "name": "Lithium",
+        "wiki": "https://en.wikipedia.org/wiki/Lithium"
+    },
+    {
+        "atomic_num": 4,
+        "symbol": "Be",
+        "name": "Beryllium",
+        "wiki": "https://en.wikipedia.org/wiki/Beryllium"
+    },
+    {
+        "atomic_num": 5,
+        "symbol": "B",
+        "name": "Boron",
+        "wiki": "https://en.wikipedia.org/wiki/Boron"
+    },
+    {
+        "atomic_num": 6,
+        "symbol": "C",
+        "name": "Carbon",
+        "wiki": "https://en.wikipedia.org/wiki/Carbon"
+    },
+    {
+        "atomic_num": 7,
+        "symbol": "N",
+        "name": "Nitrogen",
+        "wiki": "https://en.wikipedia.org/wiki/Nitrogen"
+    },
+    {
+        "atomic_num": 8,
+        "symbol": "O",
+        "name": "Oxygen",
+        "wiki": "https://en.wikipedia.org/wiki/Oxygen"
+    },
+    {
+        "atomic_num": 9,
+        "symbol": "F",
+        "name": "Fluorine",
+        "wiki": "https://en.wikipedia.org/wiki/Fluorine"
+    },
+    {
+        "atomic_num": 10,
+        "symbol": "Ne",
+        "name": "Neon",
+        "wiki": "https://en.wikipedia.org/wiki/Neon"
+    },
+    {
+        "atomic_num": 11,
+        "symbol": "Na",
+        "name": "Sodium",
+        "wiki": "https://en.wikipedia.org/wiki/Sodium"
+    },
+    {
+        "atomic_num": 12,
+        "symbol": "Mg",
+        "name": "Magnesium",
+        "wiki": "https://en.wikipedia.org/wiki/Magnesium"
+    },
+    {
+        "atomic_num": 13,
+        "symbol": "Al",
+        "name": "Aluminum",
+        "wiki": "https://en.wikipedia.org/wiki/Aluminium"
+    },
+    {
+        "atomic_num": 14,
+        "symbol": "Si",
+        "name": "Silicon",
+        "wiki": "https://en.wikipedia.org/wiki/Silicon"
+    },
+    {
+        "atomic_num": 15,
+        "symbol": "P",
+        "name": "Phosphorus",
+        "wiki": "https://en.wikipedia.org/wiki/Phosphorus"
+    },
+    {
         "atomic_num": 22,
         "symbol": "Ti",
         "name": "Titanium",
