@@ -11,12 +11,12 @@
     <div v-if="generatedColor" class="text-center">
         <v-icon class="rc-copy-icon-in-relative"
           icon="mdi-content-copy" @click="copyGeneratedColor"></v-icon>
-        <svg width="60" height="60" version="1.1"
+        <svg width="70" height="70" version="1.1"
           xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="0" width="60" height="60" stroke="black"
+            <rect x="0" y="0" width="70" height="70" stroke="black"
               stroke-width="1" :fill="generatedColor.hex()" />
         </svg>
-        <p class="mt-4 text-h4">${colorRepresentation}</p>
+        <p class="mt-4 text-h5">${colorRepresentation}</p>
     </div>
     <v-icon v-else color="grey" icon="mdi-palette" size="large"></v-icon>
 </v-card>
