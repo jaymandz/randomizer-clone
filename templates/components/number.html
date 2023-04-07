@@ -20,7 +20,7 @@
     <template #append>10</template>
 </v-slider>
 
-<v-card class="align-center d-flex flex-column justify-center rc-relative" style="height: calc(100vh - 252px)">
+<v-card :class="cardClass">
     <v-icon v-if="! results.length" color="grey" icon="mdi-numeric"
       size="large"></v-icon>
     <div v-else class="text-center">
@@ -47,6 +47,17 @@
 
 <script type="text/javascript">
 const numberComputed = {
+    cardClass()
+    {
+        return [
+            'align-center',
+            'd-flex',
+            'flex-column',
+            'justify-center',
+            'rc-below-2-controls',
+            'rc-relative',
+        ].join(' ')
+    },
     resultAverage()
     {
         var a = this.resultSum / this.results.length || 0
