@@ -1,14 +1,86 @@
 <script type="text/x-template" id="chemicalElementTemplate">
 
 <LevelOneBaseComponent title="Chemical Element">
+<template #body>
 
+<v-card :class="cardClass">
+    <v-btn class="rc-floating-btn-in-relative" color="indigo"
+      prepend-icon="mdi-shuffle" rounded="pill" size="large"
+      @click="generateElement">Generate element</v-btn>
+    <div v-if="generatedElement" class="text-center">
+        <v-icon class="rc-copy-icon-in-relative"
+          icon="mdi-content-copy" @click="copyGeneratedElement"></v-icon>
+        <p class="mb-4">
+            <span class="text-h4">${generatedElement.atomic_num}</span>
+            <span class="text-h2">${generatedElement.symbol}</span>
+        </p>
+        <p class="mb-4 text-h4">${generatedElement.name}</p>
+        <a class="text-decoration-none text-indigo" target="_blank"
+          :href="generatedElement.wiki">
+            <v-icon icon="mdi-information" size="x-small"></v-icon>
+            View on Wikipedia
+        </a>
+    </div>
+    <v-icon v-else color="grey" icon="mdi-flask" size="large"></v-icon>
+</v-card>
+
+<v-snackbar v-model="isGeneratedElementCopied">
+    <p>Copied to clipboard!</p>
+    <template #actions>
+        <v-btn color="info" @click="isGeneratedElementCopied = false">
+            Dismiss
+        </v-btn>
+    </template>
+</v-snackbar>
+
+</template>
 </LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var chemicalElementMethods = {
+    copyGeneratedElement(event)
+    {
+        navigator.clipboard.writeText(this.generatedElement.name)
+        this.isGeneratedElementCopied = true
+    },
+    generateElement(event)
+    {
+        var index = Math.floor(Math.random() * this.elements.length)
+        this.generatedElement = this.elements[index]
+    },
+}
+
+var chemicalElementComputed = {
+    cardClass()
+    {
+        return [
+            'align-center',
+            'd-flex',
+            'justify-center',
+            'rc-full-card',
+            'rc-relative',
+        ].join(' ')
+    },
+}
+
 const ChemicalElementComponent = {
     components: { LevelOneBaseComponent },
     template: '#chemicalElementTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        elements: [],
+        generatedElement: null,
+        isGeneratedElementCopied: false,
+    }},
+    mounted()
+    {
+        axios.get('{{ url_for("get_all_elements") }}').then(r => {
+            this.elements = r.data
+        })
+    },
+    methods: chemicalElementMethods,
+    computed: chemicalElementComputed,
 }
 </script>

@@ -1,0 +1,20 @@
+[
+    {
+        "atomic_num": 1,
+        "symbol": "H",
+        "name": "Hydrogen",
+        "wiki": "https://en.wikipedia.org/wiki/Hydrogen"
+    },
+    {
+        "atomic_num": 2,
+        "symbol": "He",
+        "name": "Helium",
+        "wiki": "https://en.wikipedia.org/wiki/Helium"
+    },
+    {
+        "atomic_num": 22,
+        "symbol": "Ti",
+        "name": "Titanium",
+        "wiki": "https://en.wikipedia.org/wiki/Titanium"
+    }
+]
