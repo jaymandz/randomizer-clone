@@ -53,7 +53,9 @@
     <ListFormComponent mode="edit"></ListFormComponent>
 </v-window-item>
 </v-window>
+</template>
 
+<template #bottomBar>
 <v-tabs v-model="currentTab" grow stacked bg-color="indigo">
     <v-tab value="element">
         <v-icon icon="mdi-format-list-bulleted-type"></v-icon>
@@ -87,7 +89,6 @@ var listViewMethods = {
             'd-flex',
             'flex-column',
             'justify-center',
-            'mb-2',
             'rc-relative',
         ]
         return classes.concat(extraClassArray).join(' ')
