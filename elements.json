@@ -90,9 +90,135 @@
         "wiki": "https://en.wikipedia.org/wiki/Phosphorus"
     },
     {
+        "atomic_num": 16,
+        "symbol": "S",
+        "name": "Sulfur",
+        "wiki": "https://en.wikipedia.org/wiki/Sulfur"
+    },
+    {
+        "atomic_num": 17,
+        "symbol": "Cl",
+        "name": "Chlorine",
+        "wiki": "https://en.wikipedia.org/wiki/Chlorine"
+    },
+    {
+        "atomic_num": 18,
+        "symbol": "Ar",
+        "name": "Argon",
+        "wiki": "https://en.wikipedia.org/wiki/Argon"
+    },
+    {
+        "atomic_num": 19,
+        "symbol": "K",
+        "name": "Potassium",
+        "wiki": "https://en.wikipedia.org/wiki/Potassium"
+    },
+    {
+        "atomic_num": 20,
+        "symbol": "Ca",
+        "name": "Calcium",
+        "wiki": "https://en.wikipedia.org/wiki/Calcium"
+    },
+    {
+        "atomic_num": 21,
+        "symbol": "Sc",
+        "name": "Scandium",
+        "wiki": "https://en.wikipedia.org/wiki/Scandium"
+    },
+    {
         "atomic_num": 22,
         "symbol": "Ti",
         "name": "Titanium",
         "wiki": "https://en.wikipedia.org/wiki/Titanium"
+    },
+    {
+        "atomic_num": 23,
+        "symbol": "V",
+        "name": "Vanadium",
+        "wiki": "https://en.wikipedia.org/wiki/Vanadium"
+    },
+    {
+        "atomic_num": 24,
+        "symbol": "Cr",
+        "name": "Chromium",
+        "wiki": "https://en.wikipedia.org/wiki/Chromium"
+    },
+    {
+        "atomic_num": 25,
+        "symbol": "Mn",
+        "name": "Manganese",
+        "wiki": "https://en.wikipedia.org/wiki/Manganese"
+    },
+    {
+        "atomic_num": 26,
+        "symbol": "Fe",
+        "name": "Iron",
+        "wiki": "https://en.wikipedia.org/wiki/Iron"
+    },
+    {
+        "atomic_num": 27,
+        "symbol": "Co",
+        "name": "Cobalt",
+        "wiki": "https://en.wikipedia.org/wiki/Cobalt"
+    },
+    {
+        "atomic_num": 28,
+        "symbol": "Ni",
+        "name": "Nickel",
+        "wiki": "https://en.wikipedia.org/wiki/Nickel"
+    },
+    {
+        "atomic_num": 29,
+        "symbol": "Cu",
+        "name": "Copper",
+        "wiki": "https://en.wikipedia.org/wiki/Copper"
+    },
+    {
+        "atomic_num": 30,
+        "symbol": "Zn",
+        "name": "Zinc",
+        "wiki": "https://en.wikipedia.org/wiki/Zinc"
+    },
+    {
+        "atomic_num": 31,
+        "symbol": "Ga",
+        "name": "Gallium",
+        "wiki": "https://en.wikipedia.org/wiki/Gallium"
+    },
+    {
+        "atomic_num": 32,
+        "symbol": "Ge",
+        "name": "Germanium",
+        "wiki": "https://en.wikipedia.org/wiki/Germanium"
+    },
+    {
+        "atomic_num": 33,
+        "symbol": "As",
+        "name": "Arsenic",
+        "wiki": "https://en.wikipedia.org/wiki/Arsenic"
+    },
+    {
+        "atomic_num": 34,
+        "symbol": "Se",
+        "name": "Selenium",
+        "wiki": "https://en.wikipedia.org/wiki/Selenium"
+    },
+    {
+        "atomic_num": 35,
+        "symbol": "Br",
+        "name": "Bromine",
+        "wiki": "https://en.wikipedia.org/wiki/Bromine"
+    },
+    {
+        "atomic_num": 36,
+        "symbol": "Kr",
+        "name": "Krypton",
+        "wiki": "https://en.wikipedia.org/wiki/Krypton"
+    },
+    {
+        "atomic_num": 37,
+        "symbol": "Rb",
+        "name": "Rubidium",
+        "wiki": "https://en.wikipedia.org/wiki/Rubidium"
     }
 ]
