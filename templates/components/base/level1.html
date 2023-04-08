@@ -1,6 +1,6 @@
 <script type="text/x-template" id="levelOneBaseTemplate">
 
-<RootBaseComponent>
+<RootBaseComponent :has-app-bar-extension="hasAppBarExtension">
 <template #appBarPrepend>
     <v-app-bar-nav-icon @click="isDrawerOpen = ! isDrawerOpen"></v-app-bar-nav-icon>
 </template>
@@ -24,6 +24,10 @@
 </v-menu>
 </template>
 
+<template #appBarExtension>
+    <slot name="appBarExtension"></slot>
+</template>
+
 <template #rootBody>
     <v-navigation-drawer v-model="isDrawerOpen">
         <v-list>
@@ -41,6 +45,7 @@
 const LevelOneBaseComponent = {
     components: { RootBaseComponent },
     props: {
+        hasAppBarExtension: Boolean,
         title: String,
     },
     template: '#levelOneBaseTemplate',

@@ -10,6 +10,9 @@
     <template #append>
         <slot name="appBarAppend"></slot>
     </template>
+    <template #extension v-if="hasAppBarExtension">
+        <slot name="appBarExtension"></slot>
+    </template>
 </v-app-bar>
 
 <v-main class="ma-4">
@@ -22,6 +25,9 @@
 
 <script type="text/javascript">
 const RootBaseComponent = {
+    props: {
+        hasAppBarExtension: Boolean,
+    },
     template: '#rootBaseTemplate',
 }
 </script>

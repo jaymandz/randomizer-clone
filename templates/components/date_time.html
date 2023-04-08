@@ -1,14 +1,74 @@
 <script type="text/x-template" id="dateTimeTemplate">
 
-<LevelOneBaseComponent title="Date/Time">
+<LevelOneBaseComponent has-app-bar-extension title="Date/Time">
+<template #appBarExtension>
+<v-tabs v-model="currentTab" grow stacked bg-color="indigo">
+    <v-tab value="date">Date</v-tab>
+    <v-tab value="time">Time</v-tab>
+</v-tabs>
+</template>
 
+<template #body>
+<v-window v-model="currentTab">
+<v-window-item value="date">
+    <v-list class="mb-4">
+        <v-list-item>From</v-list-item>
+        <v-list-item>To</v-list-item>
+    </v-list>
+    <p>Number of results: ${numDateResults}</p>
+    <v-slider v-model="numDateResults" :max="5" :min="1" :step="1">
+        <template #prepend>1</template>
+        <template #append>5</template>
+    </v-slider>
+    <v-card style="height: calc(100vh - 350px)" :class="dateCardClass">
+        <div v-if="dates.length">
+
+        </div>
+        <v-icon v-else color="grey" icon="mdi-calendar-question"
+          size="large"></v-icon>
+        <v-btn class="rc-floating-btn-in-relative" color="indigo"
+          prepend-icon="mdi-shuffle" rounded="pill" size="large"
+          @click="generateDates">Generate dates</v-btn>
+    </v-card>
+</v-window-item>
+<v-window-item value="time">
+
+</v-window-item>
+</v-window>
+</template>
 </LevelOneBaseComponent>
 
 </script>
 
 <script type="text/javascript">
+var dateTimeMethods = {
+    generateDates(event)
+    {
+        //
+    },
+}
+
+var dateTimeComputed = {
+    dateCardClass()
+    {
+        return [
+            'align-center',
+            'd-flex',
+            'justify-center',
+        ].join(' ')
+    },
+}
+
 const DateTimeComponent = {
     components: { LevelOneBaseComponent },
     template: '#dateTimeTemplate',
+    delimiters: ['${', '}'],
+    data() { return {
+        currentTab: 'date',
+        dates: [],
+        numDateResults: 1,
+    }},
+    methods: dateTimeMethods,
+    computed: dateTimeComputed,
 }
 </script>
