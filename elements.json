@@ -220,5 +220,203 @@
         "symbol": "Rb",
         "name": "Rubidium",
         "wiki": "https://en.wikipedia.org/wiki/Rubidium"
+    },
+    {
+        "atomic_num": 38,
+        "symbol": "Sr",
+        "name": "Strontium",
+        "wiki": "https://en.wikipedia.org/wiki/Strontium"
+    },
+    {
+        "atomic_num": 39,
+        "symbol": "Y",
+        "name": "Yttrium",
+        "wiki": "https://en.wikipedia.org/wiki/Yttrium"
+    },
+    {
+        "atomic_num": 40,
+        "symbol": "Zr",
+        "name": "Zirconium",
+        "wiki": "https://en.wikipedia.org/wiki/Zirconium"
+    },
+    {
+        "atomic_num": 41,
+        "symbol": "Nb",
+        "name": "Niobium",
+        "wiki": "https://en.wikipedia.org/wiki/Niobium"
+    },
+    {
+        "atomic_num": 42,
+        "symbol": "Mo",
+        "name": "Molybdenum",
+        "wiki": "https://en.wikipedia.org/wiki/Molybdenum"
+    },
+    {
+        "atomic_num": 43,
+        "symbol": "Tc",
+        "name": "Technetium",
+        "wiki": "https://en.wikipedia.org/wiki/Technetium"
+    },
+    {
+        "atomic_num": 44,
+        "symbol": "Ru",
+        "name": "Ruthenium",
+        "wiki": "https://en.wikipedia.org/wiki/Ruthenium"
+    },
+    {
+        "atomic_num": 45,
+        "symbol": "Rh",
+        "name": "Rhodium",
+        "wiki": "https://en.wikipedia.org/wiki/Rhodium"
+    },
+    {
+        "atomic_num": 46,
+        "symbol": "Pd",
+        "name": "Palladium",
+        "wiki": "https://en.wikipedia.org/wiki/Palladium"
+    },
+    {
+        "atomic_num": 47,
+        "symbol": "Ag",
+        "name": "Silver",
+        "wiki": "https://en.wikipedia.org/wiki/Silver"
+    },
+    {
+        "atomic_num": 48,
+        "symbol": "Cd",
+        "name": "Cadmium",
+        "wiki": "https://en.wikipedia.org/wiki/Cadmium"
+    },
+    {
+        "atomic_num": 49,
+        "symbol": "In",
+        "name": "Indium",
+        "wiki": "https://en.wikipedia.org/wiki/Indium"
+    },
+    {
+        "atomic_num": 50,
+        "symbol": "Sn",
+        "name": "Tin",
+        "wiki": "https://en.wikipedia.org/wiki/Tin"
+    },
+    {
+        "atomic_num": 51,
+        "symbol": "Sb",
+        "name": "Antimony",
+        "wiki": "https://en.wikipedia.org/wiki/Antimony"
+    },
+    {
+        "atomic_num": 52,
+        "symbol": "Te",
+        "name": "Tellurium",
+        "wiki": "https://en.wikipedia.org/wiki/Tellurium"
+    },
+    {
+        "atomic_num": 53,
+        "symbol": "I",
+        "name": "Iodine",
+        "wiki": "https://en.wikipedia.org/wiki/Iodine"
+    },
+    {
+        "atomic_num": 54,
+        "symbol": "Xe",
+        "name": "Xenon",
+        "wiki": "https://en.wikipedia.org/wiki/Xenon"
+    },
+    {
+        "atomic_num": 55,
+        "symbol": "Cs",
+        "name": "Cesium",
+        "wiki": "https://en.wikipedia.org/wiki/Caesium"
+    },
+    {
+        "atomic_num": 56,
+        "symbol": "Ba",
+        "name": "Barium",
+        "wiki": "https://en.wikipedia.org/wiki/Barium"
+    },
+    {
+        "atomic_num": 57,
+        "symbol": "La",
+        "name": "Lanthanum",
+        "wiki": "https://en.wikipedia.org/wiki/Lanthanum"
+    },
+    {
+        "atomic_num": 58,
+        "symbol": "Ce",
+        "name": "Cerium",
+        "wiki": "https://en.wikipedia.org/wiki/Cerium"
+    },
+    {
+        "atomic_num": 59,
+        "symbol": "Pr",
+        "name": "Praseodymium",
+        "wiki": "https://en.wikipedia.org/wiki/Praseodymium"
+    },
+    {
+        "atomic_num": 60,
+        "symbol": "Nd",
+        "name": "Neodymium",
+        "wiki": "https://en.wikipedia.org/wiki/Neodymium"
+    },
+    {
+        "atomic_num": 61,
+        "symbol": "Pm",
+        "name": "Promethium",
+        "wiki": "https://en.wikipedia.org/wiki/Promethium"
+    },
+    {
+        "atomic_num": 62,
+        "symbol": "Sm",
+        "name": "Samarium",
+        "wiki": "https://en.wikipedia.org/wiki/Samarium"
+    },
+    {
+        "atomic_num": 63,
+        "symbol": "Eu",
+        "name": "Europium",
+        "wiki": "https://en.wikipedia.org/wiki/Europium"
+    },
+    {
+        "atomic_num": 64,
+        "symbol": "Gd",
+        "name": "Gadolinium",
+        "wiki": "https://en.wikipedia.org/wiki/Gadolinium"
+    },
+    {
+        "atomic_num": 65,
+        "symbol": "Tb",
+        "name": "Terbium",
+        "wiki": "https://en.wikipedia.org/wiki/Terbium"
+    },
+    {
+        "atomic_num": 66,
+        "symbol": "Dy",
+        "name": "Dysprosium",
+        "wiki": "https://en.wikipedia.org/wiki/Dysprosium"
+    },
+    {
+        "atomic_num": 67,
+        "symbol": "Ho",
+        "name": "Holmium",
+        "wiki": "https://en.wikipedia.org/wiki/Holmium"
+    },
+    {
+        "atomic_num": 68,
+        "symbol": "Er",
+        "name": "Erbium",
+        "wiki": "https://en.wikipedia.org/wiki/Erbium"
+    },
+    {
+        "atomic_num": 69,
+        "symbol": "Tm",
+        "name": "Thulium",
+        "wiki": "https://en.wikipedia.org/wiki/Thulium"
+    },
+    {
+        "atomic_num": 70,
+        "symbol": "Yb",
+        "name": "Ytterbium",
+        "wiki": "https://en.wikipedia.org/wiki/Ytterbium"
     }
 ]
