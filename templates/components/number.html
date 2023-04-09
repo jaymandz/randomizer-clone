@@ -20,6 +20,8 @@
     <template #append>10</template>
 </v-slider>
 
+<v-checkbox v-model="isRepetitionsAllowed" label="Repetitions"></v-checkbox>
+
 <v-card :class="cardClass">
     <v-icon v-if="! results.length" color="grey" icon="mdi-numeric"
       size="large"></v-icon>
@@ -46,14 +48,37 @@
 </script>
 
 <script type="text/javascript">
-const numberComputed = {
+var numberMethods = {
+    checkIfRepetition(number)
+    {
+        if (this.isRepetitionsAllowed) return false
+        if (this.results.indexOf(number) == -1) return false
+        return true
+    },
+    generate(event)
+    {
+        this.isMinOrMaxNull = ! this.max || ! this.min
+        if (this.isMinOrMaxNull) return
+
+        this.results = []
+        var difference = this.max - this.min
+        while (this.results.length < this.numResults)
+        {
+            var randomNumber = Math.round(Math.random() * difference)
+            if (this.checkIfRepetition(randomNumber)) continue
+            this.results.push(randomNumber + parseInt(this.min))
+        }
+    },
+}
+
+var numberComputed = {
     cardClass()
     {
         return [
             'align-center',
             'd-flex',
             'justify-center',
-            'rc-below-2-controls',
+            'rc-below-3-controls',
         ].join(' ')
     },
     resultAverage()
@@ -73,23 +98,13 @@ const NumberComponent = {
     delimiters: ['${', '}'],
     data() { return {
         isMinOrMaxNull: false,
+        isRepetitionsAllowed: false,
         max: null,
         min: null,
         numResults: 1,
         results: [],
     }},
-    methods: { generate(event) {
-        this.isMinOrMaxNull = ! this.max || ! this.min
-        if (this.isMinOrMaxNull) return
-
-        this.results = []
-        var difference = this.max - this.min
-        for (var r = 0; r < this.numResults; r++)
-        {
-            var randomNumber = Math.round(Math.random() * difference)
-            this.results.push(randomNumber + parseInt(this.min))
-        }
-    }},
+    methods: numberMethods,
     computed: numberComputed,
 }
 </script>
