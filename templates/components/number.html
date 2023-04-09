@@ -23,13 +23,14 @@
 <v-checkbox v-model="isRepetitionsAllowed" label="Repetitions"></v-checkbox>
 
 <v-card :class="cardClass">
-    <v-icon v-if="! results.length" color="grey" icon="mdi-numeric"
-      size="large"></v-icon>
-    <div v-else class="text-center">
+    <div v-if="results.length" class="text-center">
+        <v-icon class="rc-copy-icon-in-relative"
+          icon="mdi-content-copy" @click="copyGeneratedNumbers"></v-icon>
         <p class="text-h5">${results.join(', ')}</p>
         <p class="text-caption">Sum: ${resultSum}</p>
         <p class="text-caption">Average: ${resultAverage}</p>
     </div>
+    <v-icon v-else color="grey" icon="mdi-numeric" size="large"></v-icon>
     <v-btn class="rc-floating-btn-in-relative" color="indigo"
       prepend-icon="mdi-shuffle" rounded="pill" size="large"
       @click="generate">Generate numbers</v-btn>
@@ -49,6 +50,11 @@
 
 <script type="text/javascript">
 var numberMethods = {
+    copyGeneratedNumbers(event)
+    {
+        navigator.clipboard.writeText(this.results.join(', '))
+        this.$root.isCopied = true
+    },
     checkIfRepetition(number)
     {
         if (this.isRepetitionsAllowed) return false

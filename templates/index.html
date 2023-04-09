@@ -73,6 +73,13 @@
     <router-view></router-view>
 </v-app>
 
+<v-snackbar v-model="isCopied">
+    <p>Copied to clipboard!</p>
+    <template #actions>
+        <v-btn color="info" @click="isCopied = false">Dismiss</v-btn>
+    </template>
+</v-snackbar>
+
 </div>
 </div>
 
@@ -124,7 +131,11 @@ const Router = VueRouter.createRouter({
     ],
 })
 
-const App = Vue.createApp()
+const App = Vue.createApp({
+    data() { return {
+        isCopied: false,
+    }}
+})
 
 App.use(Router)
 App.use(AppVuetify)
