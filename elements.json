@@ -418,5 +418,137 @@
         "symbol": "Yb",
         "name": "Ytterbium",
         "wiki": "https://en.wikipedia.org/wiki/Ytterbium"
+    },
+    {
+        "atomic_num": 71,
+        "symbol": "Lu",
+        "name": "Lutetium",
+        "wiki": "https://en.wikipedia.org/wiki/Lutetium"
+    },
+    {
+        "atomic_num": 72,
+        "symbol": "Hf",
+        "name": "Hafnium",
+        "wiki": "https://en.wikipedia.org/wiki/Hafnium"
+    },
+    {
+        "atomic_num": 73,
+        "symbol": "Ta",
+        "name": "Tantalum",
+        "wiki": "https://en.wikipedia.org/wiki/Tantalum"
+    },
+    {
+        "atomic_num": 74,
+        "symbol": "W",
+        "name": "Tungsten",
+        "wiki": "https://en.wikipedia.org/wiki/Tungsten"
+    },
+    {
+        "atomic_num": 75,
+        "symbol": "Re",
+        "name": "Rhenium",
+        "wiki": "https://en.wikipedia.org/wiki/Rhenium"
+    },
+    {
+        "atomic_num": 76,
+        "symbol": "Os",
+        "name": "Osmium",
+        "wiki": "https://en.wikipedia.org/wiki/Osmium"
+    },
+    {
+        "atomic_num": 77,
+        "symbol": "Ir",
+        "name": "Iridium",
+        "wiki": "https://en.wikipedia.org/wiki/Iridium"
+    },
+    {
+        "atomic_num": 78,
+        "symbol": "Pt",
+        "name": "Platinum",
+        "wiki": "https://en.wikipedia.org/wiki/Platinum"
+    },
+    {
+        "atomic_num": 79,
+        "symbol": "Au",
+        "name": "Gold",
+        "wiki": "https://en.wikipedia.org/wiki/Gold"
+    },
+    {
+        "atomic_num": 80,
+        "symbol": "Hg",
+        "name": "Mercury",
+        "wiki": "https://en.wikipedia.org/wiki/Mercury_(element)"
+    },
+    {
+        "atomic_num": 81,
+        "symbol": "Tl",
+        "name": "Thallium",
+        "wiki": "https://en.wikipedia.org/wiki/Thallium"
+    },
+    {
+        "atomic_num": 82,
+        "symbol": "Pb",
+        "name": "Lead",
+        "wiki": "https://en.wikipedia.org/wiki/Lead"
+    },
+    {
+        "atomic_num": 83,
+        "symbol": "Bi",
+        "name": "Bismuth",
+        "wiki": "https://en.wikipedia.org/wiki/Bismuth"
+    },
+    {
+        "atomic_num": 84,
+        "symbol": "Po",
+        "name": "Polonium",
+        "wiki": "https://en.wikipedia.org/wiki/Polonium"
+    },
+    {
+        "atomic_num": 85,
+        "symbol": "At",
+        "name": "Astatine",
+        "wiki": "https://en.wikipedia.org/wiki/Astatine"
+    },
+    {
+        "atomic_num": 86,
+        "symbol": "Rn",
+        "name": "Radon",
+        "wiki": "https://en.wikipedia.org/wiki/Radon"
+    },
+    {
+        "atomic_num": 87,
+        "symbol": "Fr",
+        "name": "Francium",
+        "wiki": "https://en.wikipedia.org/wiki/Francium"
+    },
+    {
+        "atomic_num": 88,
+        "symbol": "Ra",
+        "name": "Radium",
+        "wiki": "https://en.wikipedia.org/wiki/Radium"
+    },
+    {
+        "atomic_num": 89,
+        "symbol": "Ac",
+        "name": "Actinium",
+        "wiki": "https://en.wikipedia.org/wiki/Actinium"
+    },
+    {
+        "atomic_num": 90,
+        "symbol": "Th",
+        "name": "Thorium",
+        "wiki": "https://en.wikipedia.org/wiki/Thorium"
+    },
+    {
+        "atomic_num": 91,
+        "symbol": "Pa",
+        "name": "Protactinium",
+        "wiki": "https://en.wikipedia.org/wiki/Protactinium"
+    },
+    {
+        "atomic_num": 92,
+        "symbol": "U",
+        "name": "Uranium",
+        "wiki": "https://en.wikipedia.org/wiki/Uranium"
     }
 ]
