@@ -19,15 +19,6 @@
     <v-icon v-else color="grey" icon="mdi-earth" size="large"></v-icon>
 </v-card>
 
-<v-snackbar v-model="isGeneratedCountryCopied">
-    <p>Copied to clipboard!</p>
-    <template #actions>
-        <v-btn color="info" @click="isGeneratedCountryCopied = false">
-            Dismiss
-        </v-btn>
-    </template>
-</v-snackbar>
-
 </template>
 </LevelOneBaseComponent>
 
@@ -38,7 +29,7 @@ var countryMethods = {
     copyGeneratedCountry(event)
     {
         navigator.clipboard.writeText(this.generatedCountry.name)
-        this.isGeneratedCountryCopied = true
+        this.$root.isCopied = true
     },
     generateCountry(event)
     {

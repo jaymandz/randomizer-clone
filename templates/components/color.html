@@ -21,15 +21,6 @@
     <v-icon v-else color="grey" icon="mdi-palette" size="large"></v-icon>
 </v-card>
 
-<v-snackbar v-model="isGeneratedColorCopied">
-    <p>Copied to clipboard!</p>
-    <template #actions>
-        <v-btn color="info" @click="isGeneratedColorCopied = false">
-            Dismiss
-        </v-btn>
-    </template>
-</v-snackbar>
-
 </template>
 </LevelOneBaseComponent>
 
@@ -40,7 +31,7 @@ var colorMethods = {
     copyGeneratedColor(event)
     {
         navigator.clipboard.writeText(this.colorRepresentation)
-        this.isGeneratedColorCopied = true
+        this.$root.isCopied = true
     },
     generateColor(event)
     {

@@ -24,15 +24,6 @@
     <v-icon v-else color="grey" icon="mdi-flask" size="large"></v-icon>
 </v-card>
 
-<v-snackbar v-model="isGeneratedElementCopied">
-    <p>Copied to clipboard!</p>
-    <template #actions>
-        <v-btn color="info" @click="isGeneratedElementCopied = false">
-            Dismiss
-        </v-btn>
-    </template>
-</v-snackbar>
-
 </template>
 </LevelOneBaseComponent>
 
@@ -43,7 +34,7 @@ var chemicalElementMethods = {
     copyGeneratedElement(event)
     {
         navigator.clipboard.writeText(this.generatedElement.name)
-        this.isGeneratedElementCopied = true
+        this.$root.isCopied = true
     },
     generateElement(event)
     {
