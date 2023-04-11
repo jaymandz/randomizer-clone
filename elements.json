@@ -550,5 +550,161 @@
         "symbol": "U",
         "name": "Uranium",
         "wiki": "https://en.wikipedia.org/wiki/Uranium"
+    },
+    {
+        "atomic_num": 93,
+        "symbol": "Np",
+        "name": "Neptunium",
+        "wiki": "https://en.wikipedia.org/wiki/Neptunium"
+    },
+    {
+        "atomic_num": 94,
+        "symbol": "Pu",
+        "name": "Plutonium",
+        "wiki": "https://en.wikipedia.org/wiki/Plutonium"
+    },
+    {
+        "atomic_num": 95,
+        "symbol": "Am",
+        "name": "Americium",
+        "wiki": "https://en.wikipedia.org/wiki/Americium"
+    },
+    {
+        "atomic_num": 96,
+        "symbol": "Cm",
+        "name": "Curium",
+        "wiki": "https://en.wikipedia.org/wiki/Curium"
+    },
+    {
+        "atomic_num": 97,
+        "symbol": "Bk",
+        "name": "Berkelium",
+        "wiki": "https://en.wikipedia.org/wiki/Berkelium"
+    },
+    {
+        "atomic_num": 98,
+        "symbol": "Cf",
+        "name": "Californium",
+        "wiki": "https://en.wikipedia.org/wiki/Californium"
+    },
+    {
+        "atomic_num": 99,
+        "symbol": "Es",
+        "name": "Einsteinium",
+        "wiki": "https://en.wikipedia.org/wiki/Einsteinium"
+    },
+    {
+        "atomic_num": 100,
+        "symbol": "Fm",
+        "name": "Fermium",
+        "wiki": "https://en.wikipedia.org/wiki/Fermium"
+    },
+    {
+        "atomic_num": 101,
+        "symbol": "Md",
+        "name": "Mendelevium",
+        "wiki": "https://en.wikipedia.org/wiki/Mendelevium"
+    },
+    {
+        "atomic_num": 102,
+        "symbol": "No",
+        "name": "Nobelium",
+        "wiki": "https://en.wikipedia.org/wiki/Nobelium"
+    },
+    {
+        "atomic_num": 103,
+        "symbol": "Lr",
+        "name": "Lawrencium",
+        "wiki": "https://en.wikipedia.org/wiki/Lawrencium"
+    },
+    {
+        "atomic_num": 104,
+        "symbol": "Rf",
+        "name": "Rutherfordium",
+        "wiki": "https://en.wikipedia.org/wiki/Rutherfordium"
+    },
+    {
+        "atomic_num": 105,
+        "symbol": "Db",
+        "name": "Dubnium",
+        "wiki": "https://en.wikipedia.org/wiki/Dubnium"
+    },
+    {
+        "atomic_num": 106,
+        "symbol": "Sg",
+        "name": "Seaborgium",
+        "wiki": "https://en.wikipedia.org/wiki/Seaborgium"
+    },
+    {
+        "atomic_num": 107,
+        "symbol": "Bh",
+        "name": "Bohrium",
+        "wiki": "https://en.wikipedia.org/wiki/Bohrium"
+    },
+    {
+        "atomic_num": 108,
+        "symbol": "Hs",
+        "name": "Hassium",
+        "wiki": "https://en.wikipedia.org/wiki/Hassium"
+    },
+    {
+        "atomic_num": 109,
+        "symbol": "Mt",
+        "name": "Meitnerium",
+        "wiki": "https://en.wikipedia.org/wiki/Meitnerium"
+    },
+    {
+        "atomic_num": 110,
+        "symbol": "Ds",
+        "name": "Darmstadtium",
+        "wiki": "https://en.wikipedia.org/wiki/Darmstadtium"
+    },
+    {
+        "atomic_num": 111,
+        "symbol": "Rg",
+        "name": "Roentgenium",
+        "wiki": "https://en.wikipedia.org/wiki/Roentgenium"
+    },
+    {
+        "atomic_num": 112,
+        "symbol": "Cn",
+        "name": "Copernicium",
+        "wiki": "https://en.wikipedia.org/wiki/Copernicium"
+    },
+    {
+        "atomic_num": 113,
+        "symbol": "Nh",
+        "name": "Nihonium",
+        "wiki": "https://en.wikipedia.org/wiki/Nihonium"
+    },
+    {
+        "atomic_num": 114,
+        "symbol": "Fl",
+        "name": "Flerovium",
+        "wiki": "https://en.wikipedia.org/wiki/Flerovium"
+    },
+    {
+        "atomic_num": 115,
+        "symbol": "Mc",
+        "name": "Moscovium",
+        "wiki": "https://en.wikipedia.org/wiki/Moscovium"
+    },
+    {
+        "atomic_num": 116,
+        "symbol": "Lv",
+        "name": "Livermorium",
+        "wiki": "https://en.wikipedia.org/wiki/Livermorium"
+    },
+    {
+        "atomic_num": 117,
+        "symbol": "Ts",
+        "name": "Tennessine",
+        "wiki": "https://en.wikipedia.org/wiki/Tennessine"
+    },
+    {
+        "atomic_num": 118,
+        "symbol": "Og",
+        "name": "Oganesson",
+        "wiki": "https://en.wikipedia.org/wiki/Oganesson"
     }
 ]
