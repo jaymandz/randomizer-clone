@@ -9,34 +9,17 @@
 
 <template #appBarAppend>
     <v-btn form="listForm" icon="mdi-check" type="submit"
-      :disabled="! listForm.name"></v-btn>
+      :disabled="$refs.listForm && ! $refs.listForm.formData.name"></v-btn>
 </template>
 
 <template #rootBody>
-    <ListFormComponent mode="create"></ListFormComponent>
+    <ListFormComponent ref="listForm" mode="create"></ListFormComponent>
 </template>
 </RootBaseComponent>
 
 </script>
 
 <script type="text/javascript">
-const listCreateMethods = {
-    addNewItem(event)
-    {
-        this.listForm.items.push(this.newItemContent)
-        this.newItemContent = ''
-    },
-    submitListForm(event)
-    {
-        axios.post(
-            '{{ url_for("add_list") }}',
-            this.listForm,
-        ).then(r => {
-            this.$router.replace('/list')
-        })
-    },
-}
-
 const ListCreateComponent = {
     components: {
         ListFormComponent,
@@ -44,13 +27,5 @@ const ListCreateComponent = {
     },
     template: '#listCreateTemplate',
     delimiters: ['${', '}'],
-    data() { return {
-        listForm: {
-            name: '',
-            items: [],
-        },
-        newItemContent: '',
-    }},
-    methods: listCreateMethods,
 }
 </script>
