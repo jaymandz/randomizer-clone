@@ -518,5 +518,265 @@
     {
         "name": "North Macedonia",
         "wiki": "https://en.wikipedia.org/wiki/North_Macedonia"
+    },
+    {
+        "name": "Norway",
+        "wiki": "https://en.wikipedia.org/wiki/Norway"
+    },
+    {
+        "name": "Oman",
+        "wiki": "https://en.wikipedia.org/wiki/Oman"
+    },
+    {
+        "name": "Pakistan",
+        "wiki": "https://en.wikipedia.org/wiki/Pakistan"
+    },
+    {
+        "name": "Palau",
+        "wiki": "https://en.wikipedia.org/wiki/Palau"
+    },
+    {
+        "name": "Palestine",
+        "wiki": "https://en.wikipedia.org/wiki/State_of_Palestine"
+    },
+    {
+        "name": "Panama",
+        "wiki": "https://en.wikipedia.org/wiki/Panama"
+    },
+    {
+        "name": "Papua New Guinea",
+        "wiki": "https://en.wikipedia.org/wiki/Papua_New_Guinea"
+    },
+    {
+        "name": "Paraguay",
+        "wiki": "https://en.wikipedia.org/wiki/Paraguay"
+    },
+    {
+        "name": "Peru",
+        "wiki": "https://en.wikipedia.org/wiki/Peru"
+    },
+    {
+        "name": "Philippines",
+        "wiki": "https://en.wikipedia.org/wiki/Philippines"
+    },
+    {
+        "name": "Poland",
+        "wiki": "https://en.wikipedia.org/wiki/Poland"
+    },
+    {
+        "name": "Portugal",
+        "wiki": "https://en.wikipedia.org/wiki/Portugal"
+    },
+    {
+        "name": "Qatar",
+        "wiki": "https://en.wikipedia.org/wiki/Qatar"
+    },
+    {
+        "name": "Romania",
+        "wiki": "https://en.wikipedia.org/wiki/Romania"
+    },
+    {
+        "name": "Russia",
+        "wiki": "https://en.wikipedia.org/wiki/Russia"
+    },
+    {
+        "name": "Rwanda",
+        "wiki": "https://en.wikipedia.org/wiki/Rwanda"
+    },
+    {
+        "name": "Saint Kitts and Nevis",
+        "wiki": "https://en.wikipedia.org/wiki/Saint_Kitts_and_Nevis"
+    },
+    {
+        "name": "Saint Lucia",
+        "wiki": "https://en.wikipedia.org/wiki/Saint_Lucia"
+    },
+    {
+        "name": "Saint Vincent and the Grenadines",
+        "wiki": "https://en.wikipedia.org/wiki/Saint_Vincent_and_the_Grenadines"
+    },
+    {
+        "name": "Samoa",
+        "wiki": "https://en.wikipedia.org/wiki/Samoa"
+    },
+    {
+        "name": "San Marino",
+        "wiki": "https://en.wikipedia.org/wiki/San_Marino"
+    },
+    {
+        "name": "São Tomé and Príncipe",
+        "wiki": "https://en.wikipedia.org/wiki/S%C3%A3o_Tom%C3%A9_and_Pr%C3%ADncipe"
+    },
+    {
+        "name": "Saudi Arabia",
+        "wiki": "https://en.wikipedia.org/wiki/Saudi_Arabia"
+    },
+    {
+        "name": "Senegal",
+        "wiki": "https://en.wikipedia.org/wiki/Senegal"
+    },
+    {
+        "name": "Serbia",
+        "wiki": "https://en.wikipedia.org/wiki/Serbia"
+    },
+    {
+        "name": "Seychelles",
+        "wiki": "https://en.wikipedia.org/wiki/Seychelles"
+    },
+    {
+        "name": "Sierra Leone",
+        "wiki": "https://en.wikipedia.org/wiki/Sierra_Leone"
+    },
+    {
+        "name": "Singapore",
+        "wiki": "https://en.wikipedia.org/wiki/Singapore"
+    },
+    {
+        "name": "Slovakia",
+        "wiki": "https://en.wikipedia.org/wiki/Slovakia"
+    },
+    {
+        "name": "Slovenia",
+        "wiki": "https://en.wikipedia.org/wiki/Slovenia"
+    },
+    {
+        "name": "Solomon Islands",
+        "wiki": "https://en.wikipedia.org/wiki/Solomon_Islands"
+    },
+    {
+        "name": "Somalia",
+        "wiki": "https://en.wikipedia.org/wiki/Somalia"
+    },
+    {
+        "name": "South Africa",
+        "wiki": "https://en.wikipedia.org/wiki/South_Africa"
+    },
+    {
+        "name": "South Sudan",
+        "wiki": "https://en.wikipedia.org/wiki/South_Sudan"
+    },
+    {
+        "name": "Spain",
+        "wiki": "https://en.wikipedia.org/wiki/Spain"
+    },
+    {
+        "name": "Sri Lanka",
+        "wiki": "https://en.wikipedia.org/wiki/Sri_Lanka"
+    },
+    {
+        "name": "Sudan",
+        "wiki": "https://en.wikipedia.org/wiki/Sudan"
+    },
+    {
+        "name": "Suriname",
+        "wiki": "https://en.wikipedia.org/wiki/Suriname"
+    },
+    {
+        "name": "Sweden",
+        "wiki": "https://en.wikipedia.org/wiki/Sweden"
+    },
+    {
+        "name": "Switzerland",
+        "wiki": "https://en.wikipedia.org/wiki/Switzerland"
+    },
+    {
+        "name": "Syria",
+        "wiki": "https://en.wikipedia.org/wiki/Syria"
+    },
+    {
+        "name": "Tajikistan",
+        "wiki": "https://en.wikipedia.org/wiki/Tajikistan"
+    },
+    {
+        "name": "Tanzania",
+        "wiki": "https://en.wikipedia.org/wiki/Tanzania"
+    },
+    {
+        "name": "Thailand",
+        "wiki": "https://en.wikipedia.org/wiki/Thailand"
+    },
+    {
+        "name": "Togo",
+        "wiki": "https://en.wikipedia.org/wiki/Togo"
+    },
+    {
+        "name": "Tonga",
+        "wiki": "https://en.wikipedia.org/wiki/Tonga"
+    },
+    {
+        "name": "Trinidad and Tobago",
+        "wiki": "https://en.wikipedia.org/wiki/Trinidad_and_Tobago"
+    },
+    {
+        "name": "Tunisia",
+        "wiki": "https://en.wikipedia.org/wiki/Tunisia"
+    },
+    {
+        "name": "Turkey",
+        "wiki": "https://en.wikipedia.org/wiki/Turkey"
+    },
+    {
+        "name": "Turkmenistan",
+        "wiki": "https://en.wikipedia.org/wiki/Turkmenistan"
+    },
+    {
+        "name": "Tuvalu",
+        "wiki": "https://en.wikipedia.org/wiki/Tuvalu"
+    },
+    {
+        "name": "Uganda",
+        "wiki": "https://en.wikipedia.org/wiki/Uganda"
+    },
+    {
+        "name": "Ukraine",
+        "wiki": "https://en.wikipedia.org/wiki/Ukraine"
+    },
+    {
+        "name": "United Arab Emirates",
+        "wiki": "https://en.wikipedia.org/wiki/United_Arab_Emirates"
+    },
+    {
+        "name": "United Kingdom",
+        "wiki": "https://en.wikipedia.org/wiki/United_Kingdom"
+    },
+    {
+        "name": "United States",
+        "wiki": "https://en.wikipedia.org/wiki/United_States"
+    },
+    {
+        "name": "Uruguay",
+        "wiki": "https://en.wikipedia.org/wiki/Uruguay"
+    },
+    {
+        "name": "Uzbekistan",
+        "wiki": "https://en.wikipedia.org/wiki/Uzbekistan"
+    },
+    {
+        "name": "Vanuatu",
+        "wiki": "https://en.wikipedia.org/wiki/Vanuatu"
+    },
+    {
+        "name": "Vatican City",
+        "wiki": "https://en.wikipedia.org/wiki/Vatican_City"
+    },
+    {
+        "name": "Venezuela",
+        "wiki": "https://en.wikipedia.org/wiki/Venezuela"
+    },
+    {
+        "name": "Vietnam",
+        "wiki": "https://en.wikipedia.org/wiki/Vietnam"
+    },
+    {
+        "name": "Yemen",
+        "wiki": "https://en.wikipedia.org/wiki/Yemen"
+    },
+    {
+        "name": "Zambia",
+        "wiki": "https://en.wikipedia.org/wiki/Zambia"
+    },
+    {
+        "name": "Zimbabwe",
+        "wiki": "https://en.wikipedia.org/wiki/Zimbabwe"
     }
 ]
