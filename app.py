@@ -60,7 +60,7 @@ def add_list():
     for i in request.json['items']:
         item = ListItem()
         item.list_id = nl.id
-        item.body = i
+        item.body = i['body']
         db.session.add(item)
     
     db.session.commit()
@@ -75,6 +75,13 @@ def add_list_item():
     item.body = request.json['body']
     db.session.add(item)
 
+    db.session.commit()
+    return { 'insert_id': item.id }
+
+@application.post('/_delete_list_item')
+def delete_list_item():
+    item = db.get_or_404(ListItem, request.json['id'])
+    db.session.delete(item)
     db.session.commit()
     return 'ok'
 

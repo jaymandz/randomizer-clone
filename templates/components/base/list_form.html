@@ -23,14 +23,14 @@
     <span v-else>${formData.items.length} elements</span>
 </p>
 <v-list v-if="formData.items.length > 0">
-<v-list-item v-for="(i, k1) in formData.items" :title="i" :value="i">
+<v-list-item v-for="(i, k1) in formData.items" :title="i.body" :value="i">
     <template #append>
         <template v-if="mode == 'edit'">
             <v-btn flat icon="mdi-pencil-outline" size="small"
               @click="showListItemEditDialog($event, k1)"></v-btn>
             <v-btn flat icon="mdi-close" size="small"
               :disabled="formData.items.length <= 1"
-              @click="deleteItem($event, k1)"></v-btn>
+              @click="deleteItem($event, i.id, k1)"></v-btn>
         </template>
         <v-btn v-else-if="mode == 'create'" flat icon="mdi-close"
           size="small" @click="removeItemFromList($event, k1)"></v-btn>
@@ -81,18 +81,27 @@ var listFormMethods = {
             '{{ url_for("add_list_item") }}',
             { list_id: this.list.id, body: this.newItemContent },
         ).then(r => {
-            this.pushNewItemAndClear()
+            this.pushNewItemAndClear(r.data.insert_id)
             this.$emit('update')
         })
         else if (this.mode == 'create') this.pushNewItemAndClear()
     },
-    deleteItem(event, index)
+    deleteItem(event, itemId, index)
     {
-        //
+        axios.post(
+            '{{ url_for("delete_list_item") }}',
+            { id: itemId },
+        ).then(r => {
+            this.formData.items.splice(index, 1)
+            this.$emit('update')
+        })
     },
-    pushNewItemAndClear()
+    pushNewItemAndClear(id=null)
     {
-        this.formData.items.push(this.newItemContent)
+        this.formData.items.push({
+            id,
+            body: this.newItemContent,
+        })
         this.newItemContent = ''
     },
     removeItemFromList(event, index)
@@ -169,8 +178,7 @@ const ListFormComponent = {
     }},
     mounted()
     {
-        this.formData.name = this.list.name
-        this.formData.items = Array.from(this.list.items, i => i.body)
+        this.formData = this.list
     },
     methods: listFormMethods,
     computed: listFormComputed,
