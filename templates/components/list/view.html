@@ -50,7 +50,8 @@
     </v-card>
 </v-window-item>
 <v-window-item value="edit">
-    <ListFormComponent mode="edit" :list="list"></ListFormComponent>
+    <ListFormComponent mode="edit" :list="list"
+      @update="reload"></ListFormComponent>
 </v-window-item>
 </v-window>
 </template>
@@ -100,6 +101,18 @@ var listViewMethods = {
     {
         //
     },
+    load()
+    {
+        axios.get('{{ url_for("get_list") }}', { params: {
+            id: this.$route.params.id,
+        }}).then(r => {
+            this.list = r.data
+        })
+    },
+    reload(event)
+    {
+        this.load()
+    },
 }
 
 const ListViewComponent = {
@@ -120,11 +133,7 @@ const ListViewComponent = {
     }},
     mounted()
     {
-        axios.get('{{ url_for("get_list") }}', { params: {
-            id: this.$route.params.id,
-        }}).then(r => {
-            this.list = r.data
-        })
+        this.load()
     },
     methods: listViewMethods,
 }

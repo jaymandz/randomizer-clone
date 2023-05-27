@@ -8,12 +8,13 @@
 <template #appBarTitle>Create list</template>
 
 <template #appBarAppend>
-    <v-btn form="listForm" icon="mdi-check" type="submit"
-      :disabled="$refs.listForm && ! $refs.listForm.formData.name"></v-btn>
+    <v-btn form="listCreateForm" icon="mdi-check" type="submit"
+      :disabled="$refs.listCreateForm && ! $refs.listCreateForm.formData.name">
+    </v-btn>
 </template>
 
 <template #rootBody>
-    <ListFormComponent ref="listForm" mode="create"></ListFormComponent>
+    <ListFormComponent ref="listCreateForm" mode="create"></ListFormComponent>
 </template>
 </RootBaseComponent>
 

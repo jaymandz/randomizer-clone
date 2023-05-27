@@ -1,6 +1,11 @@
 <script type="text/x-template" id="listFormTemplate">
 
-<form id="listForm" @submit.prevent="submitForm">
+<v-text-field v-if="mode == 'edit'" v-model="formData.name" required
+  append-inner-icon="mdi-pencil-outline" label="List name"
+  variant="outlined" @click:append-inner="showListNameEditDialog">
+</v-text-field>
+<form v-else-if="mode == 'create'" id="listCreateForm"
+  @submit.prevent="submitCreateForm">
     <v-text-field v-model="formData.name" required label="List name"
       variant="outlined"></v-text-field>
 </form>
@@ -22,7 +27,7 @@
     <template #append>
         <template v-if="mode == 'edit'">
             <v-btn flat icon="mdi-pencil-outline" size="small"
-              @click="editItemInModal($event, k1)"></v-btn>
+              @click="showListItemEditDialog($event, k1)"></v-btn>
             <v-btn flat icon="mdi-close" size="small"
               :disabled="formData.items.length <= 1"
               @click="deleteItem($event, k1)"></v-btn>
@@ -34,31 +39,79 @@
 </v-list>
 </div>
 
+<v-dialog v-model="isShowingListNameEditDialog">
+<v-card title="Edit name">
+    <v-card-text>
+        <form id="listNameEditForm" @submit.prevent="">
+            <v-text-field v-model="listNameEditFormData.name" required
+              label="List name"></v-text-field>
+        </form>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn @click="isShowingListNameEditDialog = false">Cancel</v-btn>
+        <v-btn form="listNameEditForm" type="submit"
+          :disabled="! listNameEditFormData.name">OK</v-btn>
+    </v-card-actions>
+</v-card>
+</v-dialog>
+
+<v-dialog v-model="isShowingListItemEditDialog">
+<v-card title="Edit item">
+    <v-card-text>
+        <form id="listItemEditForm" @submit.prevent="">
+            <v-text-field v-model="listItemEditFormData.body" required
+              label="Item body"></v-text-field>
+        </form>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn @click="isShowingListItemEditDialog = false">Cancel</v-btn>
+        <v-btn form="listItemEditForm" type="submit"
+          :disabled="! listItemEditFormData.body">OK</v-btn>
+    </v-card-actions>
+</v-card>
+</v-dialog>
+
 </script>
 
 <script type="text/javascript">
 var listFormMethods = {
     addNewItem(event)
     {
-        this.formData.items.push(this.newItemContent)
-        this.newItemContent = ''
+        if (this.mode == 'edit') axios.post(
+            '{{ url_for("add_list_item") }}',
+            { list_id: this.list.id, body: this.newItemContent },
+        ).then(r => {
+            this.pushNewItemAndClear()
+            this.$emit('update')
+        })
+        else if (this.mode == 'create') this.pushNewItemAndClear()
     },
     deleteItem(event, index)
     {
         //
     },
-    editItemInModal(event, index)
+    pushNewItemAndClear()
     {
-        //
+        this.formData.items.push(this.newItemContent)
+        this.newItemContent = ''
     },
     removeItemFromList(event, index)
     {
         this.formData.items.splice(index, 1)
     },
-    submitForm(event)
+    showListItemEditDialog(event, index)
     {
-        if (this.mode == 'edit') {}
-        else if (this.mode == 'create') axios.post(
+        this.listItemEditFormData.body = this.formData.items[index]
+        this.isShowingListItemEditDialog = true
+    },
+    showListNameEditDialog(event)
+    {
+        this.listNameEditFormData.name = this.formData.name
+        this.isShowingListNameEditDialog = true
+    },
+    submitCreateForm(event)
+    {
+        axios.post(
             '{{ url_for("add_list") }}',
             this.formData,
         ).then(r => {
@@ -94,12 +147,23 @@ const ListFormComponent = {
             validator: v => ['create', 'edit'].includes(v),
         },
     },
+    emits: [
+        'update',
+    ],
     template: '#listFormTemplate',
     delimiters: ['${', '}'],
     data() { return {
         formData: {
             name: '',
             items: [],
+        },
+        isShowingListItemEditDialog: false,
+        isShowingListNameEditDialog: false,
+        listItemEditFormData: {
+            body: '',
+        },
+        listNameEditFormData: {
+            name: '',
         },
         newItemContent: '',
     }},

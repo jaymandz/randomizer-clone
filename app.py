@@ -66,6 +66,18 @@ def add_list():
     db.session.commit()
     return 'ok'
 
+@application.post('/_add_list_item')
+def add_list_item():
+    l = db.get_or_404(List, request.json['list_id'])
+
+    item = ListItem()
+    item.list_id = l.id
+    item.body = request.json['body']
+    db.session.add(item)
+
+    db.session.commit()
+    return 'ok'
+
 @application.get('/_get_all_elements')
 def get_all_elements():
     # Practice good etiquette. Close all files you open.
