@@ -82,7 +82,6 @@ var listFormMethods = {
             { list_id: this.list.id, body: this.newItemContent },
         ).then(r => {
             this.pushNewItemAndClear(r.data.insert_id)
-            this.$emit('update')
         })
         else if (this.mode == 'create') this.pushNewItemAndClear()
     },
@@ -110,7 +109,7 @@ var listFormMethods = {
     },
     showListItemEditDialog(event, index)
     {
-        this.listItemEditFormData.body = this.formData.items[index]
+        this.listItemEditFormData.body = this.formData.items[index].body
         this.isShowingListItemEditDialog = true
     },
     showListNameEditDialog(event)
@@ -156,9 +155,6 @@ const ListFormComponent = {
             validator: v => ['create', 'edit'].includes(v),
         },
     },
-    emits: [
-        'update',
-    ],
     template: '#listFormTemplate',
     delimiters: ['${', '}'],
     data() { return {
