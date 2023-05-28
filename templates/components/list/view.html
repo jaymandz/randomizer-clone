@@ -28,12 +28,14 @@
     </v-card>
 </v-window-item>
 <v-window-item value="shuffle">
-    <v-card :class="cardClass(['rc-list-view-card'])">
-        <v-icon color="grey" icon="mdi-shuffle-variant" size="large"></v-icon>
-        <v-btn class="rc-floating-btn-in-relative" color="indigo"
-          prepend-icon="mdi-shuffle-variant" rounded="pill" size="large"
-          >Shuffle</v-btn>
+    <v-card :class="shuffleCardClass">
+        <v-icon v-if="shuffledItems.length == 0" color="grey"
+          icon="mdi-shuffle-variant" size="large"></v-icon>
+        <v-list v-else item-title="body" :items="shuffledItems"></v-list>
     </v-card>
+    <v-btn class="rc-floating-btn-in-relative" color="indigo"
+        prepend-icon="mdi-shuffle-variant" rounded="pill" size="large"
+        @click="shuffleItems">Shuffle</v-btn>
 </v-window-item>
 <v-window-item value="groups">
     <p>Number of groups: ${numGroups}</p>
@@ -98,14 +100,36 @@ var listViewMethods = {
     },
     generateResults(event)
     {
-        this.results = []
-
+        this.results = this.selectSomeItems(this.numResults)
+    },
+    selectSomeItems(count)
+    {
+        var selectedItems = []
         var tempItems = _.clone(this.list.items)
-        for (var r = 0; r < this.numResults; r++)
+        for (var i = 0; i < count; i++)
         {
             var index = Math.floor(Math.random() * tempItems.length)
-            this.results.push(tempItems[index].body)
+            selectedItems.push(tempItems[index].body)
             tempItems.splice(index, 1)
+        }
+        return selectedItems
+    },
+    shuffleItems(event)
+    {
+        this.shuffledItems = this.selectSomeItems(this.list.items.length)
+    },
+}
+
+var listViewComputed = {
+    shuffleCardClass()
+    {
+        if (this.shuffledItems.length == 0)
+        {
+            return this.cardClass('rc-list-view-card')
+        }
+        else
+        {
+            return ['rc-list-view-card', 'rc-y-scroll'].join(' ')
         }
     },
 }
@@ -125,6 +149,7 @@ const ListViewComponent = {
         numGroups: 2,
         numResults: 1,
         results: [],
+        shuffledItems: [],
     }},
     mounted()
     {
@@ -135,5 +160,6 @@ const ListViewComponent = {
         })
     },
     methods: listViewMethods,
+    computed: listViewComputed,
 }
 </script>
