@@ -12,7 +12,10 @@
 
 <template #rootBody>
 <v-window v-model="currentTab">
+
 <v-window-item value="element">
+<LoadingDivComponent v-if="isLoading"></LoadingDivComponent>
+<template v-else>
     <p>Number of results: ${numResults}</p>
     <v-slider v-model="numResults" :max="list.items.length" :min="1" :step="1">
         <template #prepend>1</template>
@@ -26,8 +29,12 @@
           prepend-icon="mdi-shuffle" rounded="pill" size="large"
           @click="generateResults">Pick element</v-btn>
     </v-card>
+</template>
 </v-window-item>
+
 <v-window-item value="shuffle">
+<LoadingDivComponent v-if="isLoading"></LoadingDivComponent>
+<template v-else>
     <v-card :class="shuffleCardClass">
         <v-icon v-if="shuffledItems.length == 0" color="grey"
           icon="mdi-shuffle-variant" size="large"></v-icon>
@@ -36,8 +43,12 @@
     <v-btn class="rc-floating-btn-in-relative" color="indigo"
         prepend-icon="mdi-shuffle-variant" rounded="pill" size="large"
         @click="shuffleItems">Shuffle</v-btn>
+</template>
 </v-window-item>
+
 <v-window-item value="groups">
+<LoadingDivComponent v-if="isLoading"></LoadingDivComponent>
+<template v-else>
     <p>Number of groups: ${numGroups}</p>
     <v-slider v-model="numGroups" :max="list.items.length" :min="2" :step="1">
         <template #prepend>2</template>
@@ -50,10 +61,14 @@
           prepend-icon="mdi-account-multiple" rounded="pill" size="large"
           >Create groups</v-btn>
     </v-card>
+</template>
 </v-window-item>
+
 <v-window-item value="edit">
-    <ListFormComponent mode="edit" :list="list"></ListFormComponent>
+    <LoadingDivComponent v-if="isLoading"></LoadingDivComponent>
+    <ListFormComponent v-else mode="edit" :list="list"></ListFormComponent>
 </v-window-item>
+
 </v-window>
 </template>
 
@@ -137,12 +152,14 @@ var listViewComputed = {
 const ListViewComponent = {
     components: {
         ListFormComponent,
+        LoadingDivComponent,
         RootBaseComponent,
     },
     template: '#listViewTemplate',
     delimiters: ['${', '}'],
     data() { return {
         currentTab: 'element',
+        isLoading: true,
         list: {
             items: [],
         },
@@ -157,6 +174,7 @@ const ListViewComponent = {
             id: this.$route.params.id,
         }}).then(r => {
             this.list = r.data
+            this.isLoading = false
         })
     },
     methods: listViewMethods,
