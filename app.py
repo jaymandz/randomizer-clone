@@ -73,6 +73,13 @@ def edit_list_item():
     db.session.commit()
     return 'ok'
 
+@application.post('/_edit_list_name')
+def edit_list_name():
+    l = db.get_or_404(List, request.json['id'])
+    l.name = request.json['data']['name']
+    db.session.commit()
+    return 'ok'
+
 @application.post('/_add_list_item')
 def add_list_item():
     l = db.get_or_404(List, request.json['list_id'])

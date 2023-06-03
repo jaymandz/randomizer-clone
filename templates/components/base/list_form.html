@@ -42,15 +42,15 @@
 <v-dialog v-model="isShowingListNameEditDialog">
 <v-card title="Edit name">
     <v-card-text>
-        <form id="listNameEditForm" @submit.prevent="">
-            <v-text-field v-model="listNameEditFormData.name" required
+        <form id="listNameEditForm" @submit.prevent="editListName">
+            <v-text-field v-model="listNameEditForm.data.name" required
               label="List name"></v-text-field>
         </form>
     </v-card-text>
     <v-card-actions>
         <v-btn @click="isShowingListNameEditDialog = false">Cancel</v-btn>
         <v-btn form="listNameEditForm" type="submit"
-          :disabled="! listNameEditFormData.name">OK</v-btn>
+          :disabled="! listNameEditForm.data.name">OK</v-btn>
     </v-card-actions>
 </v-card>
 </v-dialog>
@@ -105,6 +105,16 @@ var listFormMethods = {
             this.isShowingListItemEditDialog = false
         })
     },
+    editListName(event)
+    {
+        axios.post(
+            '{{ url_for("edit_list_name") }}',
+            this.listNameEditForm,
+        ).then(r => {
+            this.formData.name = this.listNameEditForm.data.name
+            this.isShowingListNameEditDialog = false
+        })
+    },
     pushNewItemAndClear(id=null)
     {
         this.formData.items.push({
@@ -126,7 +136,7 @@ var listFormMethods = {
     },
     showListNameEditDialog(event)
     {
-        this.listNameEditFormData.name = this.formData.name
+        this.listNameEditForm.data.name = this.formData.name
         this.isShowingListNameEditDialog = true
     },
     submitCreateForm(event)
@@ -181,14 +191,16 @@ const ListFormComponent = {
             index: null,
             data: { body: '' },
         },
-        listNameEditFormData: {
-            name: '',
+        listNameEditForm: {
+            id: null,
+            data: { name: '' },
         },
         newItemContent: '',
     }},
     mounted()
     {
         this.formData = this.list
+        this.listNameEditForm.id = this.list.id
     },
     methods: listFormMethods,
     computed: listFormComputed,
