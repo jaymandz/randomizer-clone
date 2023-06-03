@@ -58,15 +58,15 @@
 <v-dialog v-model="isShowingListItemEditDialog">
 <v-card title="Edit item">
     <v-card-text>
-        <form id="listItemEditForm" @submit.prevent="">
-            <v-text-field v-model="listItemEditFormData.body" required
+        <form id="listItemEditForm" @submit.prevent="editItem">
+            <v-text-field v-model="listItemEditForm.data.body" required
               label="Item body"></v-text-field>
         </form>
     </v-card-text>
     <v-card-actions>
         <v-btn @click="isShowingListItemEditDialog = false">Cancel</v-btn>
         <v-btn form="listItemEditForm" type="submit"
-          :disabled="! listItemEditFormData.body">OK</v-btn>
+          :disabled="! listItemEditForm.data.body">OK</v-btn>
     </v-card-actions>
 </v-card>
 </v-dialog>
@@ -92,7 +92,17 @@ var listFormMethods = {
             { id: itemId },
         ).then(r => {
             this.formData.items.splice(index, 1)
-            this.$emit('update')
+        })
+    },
+    editItem(event)
+    {
+        axios.post(
+            '{{ url_for("edit_list_item") }}',
+            this.listItemEditForm,
+        ).then(r => {
+            var index = this.listItemEditForm.index
+            this.formData.items[index].body = this.listItemEditForm.data.body
+            this.isShowingListItemEditDialog = false
         })
     },
     pushNewItemAndClear(id=null)
@@ -109,7 +119,9 @@ var listFormMethods = {
     },
     showListItemEditDialog(event, index)
     {
-        this.listItemEditFormData.body = this.formData.items[index].body
+        this.listItemEditForm.id = this.formData.items[index].id
+        this.listItemEditForm.index = index
+        this.listItemEditForm.data.body = this.formData.items[index].body
         this.isShowingListItemEditDialog = true
     },
     showListNameEditDialog(event)
@@ -164,8 +176,10 @@ const ListFormComponent = {
         },
         isShowingListItemEditDialog: false,
         isShowingListNameEditDialog: false,
-        listItemEditFormData: {
-            body: '',
+        listItemEditForm: {
+            id: null,
+            index: null,
+            data: { body: '' },
         },
         listNameEditFormData: {
             name: '',
