@@ -39,6 +39,13 @@
 </v-list>
 </div>
 
+<v-snackbar v-model="isItemDeleted">
+    <p>Item deleted.</p>
+    <template #actions>
+        <v-btn color="info" @click="isItemDeleted = false">Dismiss</v-btn>
+    </template>
+</v-snackbar>
+
 <v-dialog v-model="isShowingListNameEditDialog">
 <v-card title="Edit name">
     <v-card-text>
@@ -92,6 +99,7 @@ var listFormMethods = {
             { id: itemId },
         ).then(r => {
             this.formData.items.splice(index, 1)
+            this.isItemDeleted = true
         })
     },
     editItem(event)
@@ -184,6 +192,7 @@ const ListFormComponent = {
             name: '',
             items: [],
         },
+        isItemDeleted: false,
         isShowingListItemEditDialog: false,
         isShowingListNameEditDialog: false,
         listItemEditForm: {
