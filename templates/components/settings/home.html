@@ -1,0 +1,101 @@
+<script type="text/x-template" id="settingsTemplate">
+
+<RootBaseComponent>
+
+<template #appBarPrepend>
+    <v-app-bar-nav-icon icon="mdi-arrow-left"
+      @click="$event.view.history.back()"></v-app-bar-nav-icon>
+</template>
+<template #appBarTitle>Settings</template>
+
+<template #rootBody>
+<v-list>
+    <v-list-item @click="isShowingInitialScreenSelectDialog = true">
+        <template #prepend>
+            <v-icon icon="mdi-home-edit"></v-icon>
+        </template>
+        <v-list-item-title>Choose initial screen</v-list-item-title>
+        <v-list-item-subtitle>
+            Number
+        </v-list-item-subtitle>
+    </v-list-item>
+    <v-list-item>
+        <template #prepend>
+            <v-icon icon="mdi-application-import"></v-icon>
+        </template>
+        <v-list-item-title>Import lists from backup file</v-list-item-title>
+        <v-list-item-subtitle>
+            Your existing lists will not be affected.
+        </v-list-item-subtitle>
+    </v-list-item>
+    <v-list-item>
+        <template #prepend>
+            <v-icon icon="mdi-application-export"></v-icon>
+        </template>
+        <v-list-item-title>Export lists to backup file</v-list-item-title>
+    </v-list-item>
+    <v-list-item to="/settings/about">
+        <template #prepend>
+            <v-icon icon="mdi-information-outline"></v-icon>
+        </template>
+        <v-list-item-title>About</v-list-item-title>
+    </v-list-item>
+</v-list>
+
+<v-dialog v-model="isShowingInitialScreenSelectDialog">
+<v-card title="Choose initial screen">
+<v-card-text>
+<form id="initialScreenSelectForm" @submit.prevent="saveInitialScreen">
+    <v-radio-group v-model="initialScreenSelectForm.screen_name">
+        <v-radio label="Number" value="number"></v-radio>
+        <v-radio label="Coin flip" value="coin_flip"></v-radio>
+        <v-radio label="List" value="list"></v-radio>
+        <v-radio label="Letter" value="letter"></v-radio>
+        <v-radio label="Color" value="color"></v-radio>
+        <v-radio label="Password" value="password"></v-radio>
+        <v-radio label="Dice roll" value="dice_roll"></v-radio>
+        <v-radio label="Country" value="country"></v-radio>
+        <v-radio label="Date/time" value="date_time"></v-radio>
+        <v-radio label="Chemical element" value="chemical_element"></v-radio>
+    </v-radio-group>
+</form>
+</v-card-text>
+<v-card-actions>
+    <v-btn @click="isShowingInitialScreenSelectDialog = false">Cancel</v-btn>
+    <v-btn form="initialScreenSelectForm" type="submit">OK</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
+</template>
+
+</RootBaseComponent>
+
+</script>
+
+<script type="text/javascript">
+var settingsMethods = {
+    saveInitialScreen(event)
+    {
+        axios.post(
+            '{{ url_for("save_initial_screen") }}',
+            this.initialScreenSelectForm,
+        ).then(r => {
+            this.isShowingInitialScreenSelectDialog = false
+        })
+    },
+}
+
+const SettingsComponent = {
+    components: {
+        RootBaseComponent,
+    },
+    template: '#settingsTemplate',
+    data() { return {
+        initialScreenSelectForm: {
+            screen_name: 'number',
+        },
+        isShowingInitialScreenSelectDialog: false,
+    }},
+    methods: settingsMethods,
+}
+</script>

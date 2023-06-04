@@ -111,6 +111,8 @@
 {% include 'components/list/create.html' %}
 {% include 'components/list/view.html' %}
 
+{% include 'components/settings/home.html' %}
+
 <script type="text/javascript">
 const AppVuetify = Vuetify.createVuetify()
 
@@ -123,6 +125,8 @@ const Router = VueRouter.createRouter({
         { path: '/list/view/:id', component: ListViewComponent },
         { path: '/list/create', component: ListCreateComponent },
         { path: '/list', component: ListComponent },
+
+        { path: '/settings', component: SettingsComponent },
     
         { path: '/letter', component: LetterComponent },
         { path: '/color', component: ColorComponent },
