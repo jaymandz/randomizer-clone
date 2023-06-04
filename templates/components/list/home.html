@@ -20,7 +20,7 @@
 <v-text-field v-model="filter" label="Search" prepend-inner-icon="mdi-magnify"
   variant="outlined"></v-text-field>
 
-<div class="rc-y-scroll" style="height: calc(100vh - 174px)">
+<div v-if="fLists.length > 0" class="rc-below-1-control rc-y-scroll">
 <v-list lines="two">
     <v-list-item v-for="(l, k1) in fLists" :active="false"
       :subtitle="l.items.length+' item'+(l.items.length == 1 ? '' : 's')"
