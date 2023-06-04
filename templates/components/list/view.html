@@ -7,7 +7,7 @@
 </template>
 <template #appBarTitle>${list.name}</template>
 <template #appBarAppend>
-    <v-btn icon="mdi-delete-outline" @click="confirmDelete"></v-btn>
+    <v-btn icon="mdi-delete-outline" @click="isConfirmingDelete = true"></v-btn>
 </template>
 
 <template #rootBody>
@@ -48,6 +48,12 @@
 
 <v-window-item value="groups">
 <LoadingDivComponent v-if="isLoading"></LoadingDivComponent>
+<div v-else-if="list.items.length < 2" :class="cardClass('rc-list-view-card')">
+    <v-icon icon="mdi-alert" size="x-large"></v-icon>
+    <h2>The list must have more than two items to be split into groups.</h2>
+    <v-btn color="indigo" prepend-icon="mdi-pencil"
+      @click="currentTab = 'edit'">Edit list</v-btn>
+</div>
 <template v-else>
     <p>Number of groups: ${numGroups}</p>
     <v-slider v-model="numGroups" :max="list.items.length" :min="2" :step="1">
@@ -70,6 +76,18 @@
 </v-window-item>
 
 </v-window>
+
+<v-dialog v-model="isConfirmingDelete">
+<v-card title="Confirm deletion">
+    <v-card-text>
+        <p>Are you sure you want to delete this list?</p>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn @click="isConfirmingDelete = false">Cancel</v-btn>
+        <v-btn @click="deleteList">OK</v-btn>
+    </v-card-actions>
+</v-card>
+</v-dialog>
 </template>
 
 <template #bottomBar>
@@ -109,9 +127,14 @@ var listViewMethods = {
         ]
         return classes.concat(extraClassArray).join(' ')
     },
-    confirmDelete(event)
+    deleteList(event)
     {
-        //
+        axios.post(
+            '{{ url_for("delete_list") }}',
+            { id: this.list.id },
+        ).then(r => {
+            this.$router.replace('/list')
+        })
     },
     generateResults(event)
     {
@@ -159,6 +182,7 @@ const ListViewComponent = {
     delimiters: ['${', '}'],
     data() { return {
         currentTab: 'element',
+        isConfirmingDelete: false,
         isLoading: true,
         list: {
             items: [],
