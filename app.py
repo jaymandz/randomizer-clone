@@ -43,9 +43,7 @@ def get_all_lists():
 
 @application.get('/_get_list')
 def get_list():
-    result = db.session.execute(
-        db.select(List).filter_by(id=request.args.get('id'))
-    ).scalar_one()
+    result = db.get_or_404(List, request.args.get('id'))
     return jsonify(__dict_from_list_result(result))
 
 @application.post('/_add_list')
