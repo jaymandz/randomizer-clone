@@ -106,18 +106,14 @@ def delete_list_item():
 
 @application.get('/_get_all_elements')
 def get_all_elements():
-    # Practice good etiquette. Close all files you open.
     file = open('elements.json', 'r')
     elements = json.load(file)
     file.close()
-    # Now send the contents to the client.
     return jsonify(elements)
 
 @application.get('/_get_all_countries')
 def get_all_countries():
-    # Practice good etiquette. Close all files you open.
     file = open('countries.json', 'r')
     countries = json.load(file)
     file.close()
-    # Now send the contents to the client.
     return jsonify(countries)
