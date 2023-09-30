@@ -92,7 +92,7 @@ const SettingsComponent = {
     template: '#settingsTemplate',
     data() { return {
         settingsForm: {
-            screen_name: 'number',
+            screen_name: Cookies.get('randomizer.screenName'),
         },
         isShowingInitialScreenSelectDialog: false,
     }},
