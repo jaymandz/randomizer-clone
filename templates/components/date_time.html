@@ -11,16 +11,14 @@
 <template #body>
 <v-window v-model="currentTab">
 <v-window-item value="date">
-    <v-list class="mb-4">
-        <v-list-item>From</v-list-item>
-        <v-list-item>To</v-list-item>
-    </v-list>
+    <v-text-field v-model="dateFrom" label="From" type="date"></v-text-field>
+    <v-text-field v-model="dateTo" label="To" type="date"></v-text-field>
     <p>Number of results: ${numDateResults}</p>
     <v-slider v-model="numDateResults" :max="5" :min="1" :step="1">
         <template #prepend>1</template>
         <template #append>5</template>
     </v-slider>
-    <v-card style="height: calc(100vh - 350px)" :class="dateCardClass">
+    <v-card style="height: calc(100vh - 378px)" :class="cardClass">
         <div v-if="dates.length">
 
         </div>
@@ -32,7 +30,23 @@
     </v-card>
 </v-window-item>
 <v-window-item value="time">
+    <v-text-field v-model="timeFrom" label="From" type="time"></v-text-field>
+    <v-text-field v-model="timeTo" label="To" type="time"></v-text-field>
+    <p>Number of results: ${numTimeResults}</p>
+    <v-slider v-model="numTimeResults" :max="5" :min="1" :step="1">
+        <template #prepend>1</template>
+        <template #append>5</template>
+    </v-slider>
+    <v-card style="height: calc(100vh - 378px)" :class="cardClass">
+        <div v-if="times.length">
 
+        </div>
+        <v-icon v-else color="grey" icon="mdi-clock-fast"
+          size="large"></v-icon>
+        <v-btn class="rc-floating-btn-in-relative" color="indigo"
+          prepend-icon="mdi-shuffle" rounded="pill" size="large"
+          @click="generateDates">Generate dates</v-btn>
+    </v-card>
 </v-window-item>
 </v-window>
 </template>
@@ -49,7 +63,7 @@ var dateTimeMethods = {
 }
 
 var dateTimeComputed = {
-    dateCardClass()
+    cardClass()
     {
         return [
             'align-center',
@@ -65,8 +79,14 @@ const DateTimeComponent = {
     delimiters: ['${', '}'],
     data() { return {
         currentTab: 'date',
+        dateFrom: null,
+        dateTo: null,
         dates: [],
         numDateResults: 1,
+        numTimeResults: 1,
+        timeFrom: null,
+        timeTo: null,
+        times: [],
     }},
     methods: dateTimeMethods,
     computed: dateTimeComputed,
