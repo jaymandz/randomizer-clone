@@ -17,9 +17,9 @@
 <LoadingDivComponent v-if="isLoading"></LoadingDivComponent>
 <template v-else>
     <p>Number of results: ${numResults}</p>
-    <v-slider v-model="numResults" :max="list.items.length" :min="1" :step="1">
+    <v-slider v-model="numResults" :max="maxOutputLength" :min="1" :step="1">
         <template #prepend>1</template>
-        <template #append>${list.items.length}</template>
+        <template #append>${maxOutputLength}</template>
     </v-slider>
     <v-card :class="cardClass(['rc-list-view-short-card'])">
         <v-icon v-if="results.length == 0" color="grey"
@@ -56,16 +56,20 @@
 </div>
 <template v-else>
     <p>Number of groups: ${numGroups}</p>
-    <v-slider v-model="numGroups" :max="list.items.length" :min="2" :step="1">
+    <v-slider v-model="numGroups" :max="maxOutputLength" :min="2" :step="1">
         <template #prepend>2</template>
-        <template #append>${list.items.length}</template>
+        <template #append>${maxOutputLength}</template>
     </v-slider>
     <v-card :class="cardClass(['rc-list-view-short-card'])">
-        <v-icon color="grey" icon="mdi-account-multiple-outline"
-          size="large"></v-icon>
+        <v-icon v-if="groups.length == 0" color="grey"
+          icon="mdi-account-multiple-outline" size="large"></v-icon>
+        <v-list v-else>
+            <v-list-item v-for="(g, k1) in groups" :title="joinItemBodies(g)"
+              :value="k1"></v-list-item>
+        </v-list>
         <v-btn class="rc-floating-btn-in-relative" color="indigo"
           prepend-icon="mdi-account-multiple" rounded="pill" size="large"
-          >Create groups</v-btn>
+          @click="groupItems">Create groups</v-btn>
     </v-card>
 </template>
 </v-window-item>
@@ -140,6 +144,38 @@ var listViewMethods = {
     {
         this.results = this.selectSomeItems(this.numResults)
     },
+    groupItems(event)
+    {
+        this.groups = _.map(Array(this.numGroups), (g) => [])
+
+        var items = _.clone(this.list.items)
+        var numItemsPerGroup = Math.ceil(items.length / this.numGroups)
+        for (var p = 0; p < numItemsPerGroup; p++)
+        {
+            items = this.moveItemsIntoGroupsRandomly(items)
+        }
+    },
+    joinItemBodies(items)
+    {
+        var bodyList = []
+        for (var i in items) bodyList.push(items[i].body)
+        return bodyList.join(', ')
+    },
+    moveItemsIntoGroupsRandomly(items)
+    {
+        var gIndices = Array.from(Array(this.numGroups).keys())
+        while (gIndices.length > 0 && items.length > 0)
+        {
+            var randomGiIndex = Math.floor(Math.random() * gIndices.length)
+            var randomGroupIndex = gIndices[randomGiIndex]
+            var randomItemIndex = Math.floor(Math.random() * items.length)
+
+            this.groups[randomGroupIndex].push(items[randomItemIndex])
+            items.splice(randomItemIndex, 1)
+            gIndices.splice(randomGiIndex, 1)
+        }
+        return items
+    },
     selectSomeItems(count)
     {
         var selectedItems = []
@@ -159,6 +195,11 @@ var listViewMethods = {
 }
 
 var listViewComputed = {
+    maxOutputLength()
+    {
+        if (this.list.items.length > 10) return 10
+        else return this.list.items.length
+    },
     shuffleCardClass()
     {
         if (this.shuffledItems.length == 0)
@@ -182,6 +223,7 @@ const ListViewComponent = {
     delimiters: ['${', '}'],
     data() { return {
         currentTab: 'element',
+        groups: [],
         isConfirmingDelete: false,
         isLoading: true,
         list: {
