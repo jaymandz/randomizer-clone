@@ -5,11 +5,11 @@
 
 <v-row>
     <v-col>
-        <v-text-field v-model="min" label="Min:"
+        <v-text-field v-model.number="min" label="Min:"
           variant="outlined"></v-text-field>
     </v-col>
     <v-col>
-        <v-text-field v-model="max" label="Max:"
+        <v-text-field v-model.number="max" label="Max:"
           variant="outlined"></v-text-field>
     </v-col>
 </v-row>
@@ -67,12 +67,12 @@ var numberMethods = {
         if (this.isMinOrMaxNull) return
 
         this.results = []
-        var difference = this.max - this.min
+        var diff = this.max - this.min
         while (this.results.length < this.numResults)
         {
-            var randomNumber = Math.round(Math.random() * difference)
+            var randomNumber = Math.round(Math.random() * diff) + this.min
             if (this.checkIfRepetition(randomNumber)) continue
-            this.results.push(randomNumber + parseInt(this.min))
+            this.results.push(randomNumber)
         }
     },
 }
