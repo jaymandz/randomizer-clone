@@ -55,22 +55,29 @@
       @click="currentTab = 'edit'">Edit list</v-btn>
 </div>
 <template v-else>
-    <p>Number of groups: ${numGroups}</p>
-    <v-slider v-model="numGroups" :max="maxOutputLength" :min="2" :step="1">
-        <template #prepend>2</template>
-        <template #append>${maxOutputLength}</template>
-    </v-slider>
-    <v-card :class="cardClass(['rc-list-view-short-card'])">
-        <v-icon v-if="groups.length == 0" color="grey"
-          icon="mdi-account-multiple-outline" size="large"></v-icon>
-        <v-list v-else>
-            <v-list-item v-for="(g, k1) in groups" :title="joinItemBodies(g)"
-              :value="k1"></v-list-item>
-        </v-list>
-        <v-btn class="rc-floating-btn-in-relative" color="indigo"
-          prepend-icon="mdi-account-multiple" rounded="pill" size="large"
-          @click="groupItems">Create groups</v-btn>
-    </v-card>
+<p>Number of groups: ${numGroups}</p>
+<v-slider v-model="numGroups" :max="maxOutputLength" :min="2" :step="1">
+    <template #prepend>2</template>
+    <template #append>${maxOutputLength}</template>
+</v-slider>
+
+<v-card :class="groupsCardClass">
+<v-icon v-if="groups.length == 0" color="grey"
+  icon="mdi-account-multiple-outline" size="large"></v-icon>
+<v-list v-else>
+    <v-list-item v-for="(g, k1) in groups" :title="joinItemBodies(g)"
+      :value="k1">
+        <template #append>
+            <v-btn flat icon="mdi-content-copy" size="small"
+              @click="copyGroup($event, g)"></v-btn>
+        </template>
+    </v-list-item>
+</v-list>
+<v-btn class="rc-floating-btn-in-relative" color="indigo"
+  prepend-icon="mdi-account-multiple" rounded="pill" size="large"
+  @click="groupItems">Create groups</v-btn>
+</v-card>
+
 </template>
 </v-window-item>
 
@@ -131,6 +138,11 @@ var listViewMethods = {
         ]
         return classes.concat(extraClassArray).join(' ')
     },
+    copyGroup(event, groupItems)
+    {
+        navigator.clipboard.writeText(this.joinItemBodies(groupItems))
+        this.$root.isCopied = true
+    },
     deleteList(event)
     {
         axios.post(
@@ -161,18 +173,27 @@ var listViewMethods = {
         for (var i in items) bodyList.push(items[i].body)
         return bodyList.join(', ')
     },
+    listCardClass(listLength, extraClass)
+    {
+        if (listLength == 0)
+        {
+            return this.cardClass(extraClass)
+        }
+        else
+        {
+            return [extraClass, 'rc-y-scroll'].join(' ')
+        }
+    },
     moveItemsIntoGroupsRandomly(items)
     {
         var gIndices = Array.from(Array(this.numGroups).keys())
-        while (gIndices.length > 0 && items.length > 0)
+        for (var g = 0; g < gIndices.length && items.length > 0; g++)
         {
-            var randomGiIndex = Math.floor(Math.random() * gIndices.length)
-            var randomGroupIndex = gIndices[randomGiIndex]
+            var groupIndex = gIndices[g]
             var randomItemIndex = Math.floor(Math.random() * items.length)
 
-            this.groups[randomGroupIndex].push(items[randomItemIndex])
+            this.groups[groupIndex].push(items[randomItemIndex])
             items.splice(randomItemIndex, 1)
-            gIndices.splice(randomGiIndex, 1)
         }
         return items
     },
@@ -195,6 +216,12 @@ var listViewMethods = {
 }
 
 var listViewComputed = {
+    groupsCardClass()
+    {
+        return this.listCardClass(
+            this.groups.length, 'rc-list-view-short-card'
+        )
+    },
     maxOutputLength()
     {
         if (this.list.items.length > 10) return 10
@@ -202,14 +229,9 @@ var listViewComputed = {
     },
     shuffleCardClass()
     {
-        if (this.shuffledItems.length == 0)
-        {
-            return this.cardClass('rc-list-view-card')
-        }
-        else
-        {
-            return ['rc-list-view-card', 'rc-y-scroll'].join(' ')
-        }
+        return this.listCardClass(
+            this.shuffledItems.length, 'rc-list-view-card'
+        )
     },
 }
 
