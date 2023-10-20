@@ -46,6 +46,13 @@
     </template>
 </v-snackbar>
 
+<v-snackbar v-model="isCreatedListEmpty">
+    <p>The list must have at least one element.</p>
+    <template #actions>
+        <v-btn color="info" @click="isCreatedListEmpty= false">Dismiss</v-btn>
+    </template>
+</v-snackbar>
+
 <v-dialog v-model="isShowingListNameEditDialog">
 <v-card title="Edit name">
     <v-card-text>
@@ -149,6 +156,9 @@ var listFormMethods = {
     },
     submitCreateForm(event)
     {
+        this.isCreatedListEmpty = this.formData.items.length == 0
+        if (this.isCreatedListEmpty) return
+
         axios.post(
             '{{ url_for("add_list") }}',
             this.formData,
@@ -192,6 +202,7 @@ const ListFormComponent = {
             name: '',
             items: [],
         },
+        isCreatedListEmpty: false,
         isItemDeleted: false,
         isShowingListItemEditDialog: false,
         isShowingListNameEditDialog: false,
