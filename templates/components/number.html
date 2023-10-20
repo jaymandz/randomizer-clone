@@ -43,6 +43,13 @@
     </template>
 </v-snackbar>
 
+<v-snackbar v-model="isRangeTooSmall">
+    <p>It is impossible to generate that many unique numbers in this range.</p>
+    <template #actions>
+        <v-btn color="info" @click="isRangeTooSmall = false">Dismiss</v-btn>
+    </template>
+</v-snackbar>
+
 </template>
 </LevelOneBaseComponent>
 
@@ -65,6 +72,10 @@ var numberMethods = {
     {
         this.isMinOrMaxNull = ! this.max || ! this.min
         if (this.isMinOrMaxNull) return
+
+        var rangeBelowResults = (this.max - this.min) + 1 < this.numResults
+        this.isRangeTooSmall = ! this.isRepetitionsAllowed && rangeBelowResults
+        if (this.isRangeTooSmall) return
 
         this.results = []
         var diff = this.max - this.min
@@ -104,6 +115,7 @@ const NumberComponent = {
     delimiters: ['${', '}'],
     data() { return {
         isMinOrMaxNull: false,
+        isRangeTooSmall: false,
         isRepetitionsAllowed: false,
         max: null,
         min: null,
