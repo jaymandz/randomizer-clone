@@ -17,10 +17,16 @@
 <template v-else>
 <v-btn class="rc-floating-btn" color="indigo" icon="mdi-plus"
   to="/list/create"></v-btn>
-<v-text-field v-model="filter" label="Search" prepend-inner-icon="mdi-magnify"
-  variant="outlined"></v-text-field>
+<v-text-field v-model="filter" clearable label="Search"
+  prepend-inner-icon="mdi-magnify" variant="outlined"
+  @click:clear="filter = ''"></v-text-field>
 
-<div v-if="fLists.length > 0" class="rc-below-1-control rc-y-scroll">
+<v-btn v-if="lists.length > 1" class="mb-3" color="indigo" variant="text"
+  @click="isPickingFromMultipleLists = true">
+    Pick elements from multiple lists
+</v-btn>
+
+<div v-if="fLists.length > 0" :class="listDivClass">
 <v-list lines="two">
     <v-list-item v-for="(l, k1) in fLists" :active="false"
       :subtitle="l.items.length+' item'+(l.items.length == 1 ? '' : 's')"
@@ -31,7 +37,26 @@
     </v-list-item>
 </v-list>
 </div>
+<div v-else class="text-center text-h4">
+    No lists found
+</div>
 </template>
+
+<v-dialog v-model="isPickingFromMultipleLists">
+<v-card title="Select lists">
+    <v-card-text>
+        <p>
+            One element will be randomly picked from each list you select.
+            You must select at least two lists.
+        </p>
+        <v-checkbox v-for="l in lists" density="compact" :label="l.name"></v-checkbox>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn>Close</v-btn>
+        <v-btn disabled>Next</v-btn>
+    </v-card-actions>
+</v-card>
+</v-dialog>
 
 </template>
 </LevelOneBaseComponent>
@@ -57,7 +82,16 @@ var listComputed = {
             'justify-center',
             'rc-spacious-div',
         ].join(' ')
-    }
+    },
+    listDivClass()
+    {
+        var classes = ['rc-y-scroll']
+
+        if (this.lists.length > 1) classes.push('rc-multiple-list-div')
+        else classes.push('rc-below-1-control')
+
+        return classes.join(' ')
+    },
 }
 const ListComponent = {
     components: { LevelOneBaseComponent },
@@ -66,6 +100,7 @@ const ListComponent = {
         filter: '',
         fLists: [],
         isLoading: true,
+        isPickingFromMultipleLists: false,
         lists: [],
     }},
     mounted()
