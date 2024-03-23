@@ -105,13 +105,15 @@ const DateTimeComponent = {
     delimiters: ['${', '}'],
     data() { return {
         currentTab: 'date',
-        dateFrom: null,
-        dateTo: null,
+        dateFrom: luxon.DateTime.now().plus({ months: -1 }).toISODate(),
+        dateTo: luxon.DateTime.now().toISODate(),
         dates: [],
         numDateResults: 1,
         numTimeResults: 1,
-        timeFrom: null,
-        timeTo: null,
+        timeFrom: luxon.DateTime.fromObject({ hour: 0, minute: 0 })
+          .toLocaleString(luxon.DateTime.TIME_24_SIMPLE),
+        timeTo: luxon.DateTime.fromObject({ hour: 23, minute: 59 })
+          .toLocaleString(luxon.DateTime.TIME_24_SIMPLE),
         times: [],
     }},
     methods: dateTimeMethods,
