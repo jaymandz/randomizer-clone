@@ -28,7 +28,7 @@
             Your existing lists will not be affected.
         </v-list-item-subtitle>
     </v-list-item>
-    <v-list-item>
+    <v-list-item @click="exportLists">
         <template #prepend>
             <v-icon icon="mdi-application-export"></v-icon>
         </template>
@@ -74,6 +74,24 @@
 
 <script type="text/javascript">
 var settingsMethods = {
+    exportLists(event)
+    {
+        axios.get('{{ url_for("get_all_lists") }}').then(r => {
+            var lj = JSON.stringify(this.listsDictFromDbData(r.data))
+            var blob = new Blob([lj], { type: 'text/plain; charset=utf-8' })
+            saveAs(blob, 'backup_'+luxon.DateTime.now().toISODate()+'.json')
+        })
+    },
+    listsDictFromDbData(data)
+    {
+        var listsDict = {}
+        for (var l in data)
+        {
+            var list = data[l]
+            listsDict[list.name] = data[l].items.map(i => i.body)
+        }
+        return listsDict
+    },
     saveSettings(event)
     {
         Cookies.set(
