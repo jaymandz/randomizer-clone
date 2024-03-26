@@ -163,6 +163,21 @@ if (Cookies.get('randomizer.screenName') === undefined) Cookies.set(
     { sameSite: 'strict' },
 )
 
+var appMethods = {
+    selectSomeItemsInList(list, count)
+    {
+        var selectedItems = []
+        var tempItems = _.clone(list.items)
+        for (var i = 0; i < count; i++)
+        {
+            var index = Math.floor(Math.random() * tempItems.length)
+            selectedItems.push(tempItems[index].body)
+            tempItems.splice(index, 1)
+        }
+        return selectedItems
+    },
+}
+
 const AppVuetify = Vuetify.createVuetify()
 
 const Router = VueRouter.createRouter({
@@ -192,6 +207,7 @@ const App = Vue.createApp({
     data() { return {
         isCopied: false,
     }},
+    methods: appMethods,
 })
 
 App.use(Router)

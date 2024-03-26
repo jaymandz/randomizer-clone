@@ -22,7 +22,7 @@
   @click:clear="filter = ''"></v-text-field>
 
 <v-btn v-if="lists.length > 1" class="mb-3" color="indigo" variant="text"
-  @click="isPickingFromMultipleLists = true">
+  @click="isSelectingMultipleListsToPick = true">
     Pick elements from multiple lists
 </v-btn>
 
@@ -42,18 +42,39 @@
 </div>
 </template>
 
-<v-dialog v-model="isPickingFromMultipleLists">
+<v-dialog v-model="isSelectingMultipleListsToPick" fullscreen>
 <v-card title="Select lists">
     <v-card-text>
         <p>
             One element will be randomly picked from each list you select.
             You must select at least two lists.
         </p>
-        <v-checkbox v-for="l in lists" density="compact" :label="l.name"></v-checkbox>
+        <v-checkbox v-model="multipleSourceListIndices" v-for="(l, k) in lists"
+          hide-details density="compact" :label="l.name"
+          :value="k"></v-checkbox>
     </v-card-text>
     <v-card-actions>
-        <v-btn>Close</v-btn>
-        <v-btn disabled>Next</v-btn>
+        <v-btn @click="isSelectingMultipleListsToPick = false">Close</v-btn>
+        <v-btn :disabled="multipleSourceListIndices.length < 2"
+          @click="proceedToPickFromMultipleLists">Next</v-btn>
+    </v-card-actions>
+</v-card>
+</v-dialog>
+
+<v-dialog v-model="isPickingFromMultipleLists" fullscreen>
+<v-card title="Pick elements">
+    <v-card-text>
+        <p>Selected lists: ${multipleListText}</p>
+        <v-list lines="two">
+            <v-list-item v-for="i in itemsFromMultipleLists"
+              :subtitle="lists[i.listIndex].name"
+              :title="lists[i.listIndex].items[i.itemIndex].body">
+            </v-list-item>
+        </v-list>
+    </v-card-text>
+    <v-card-actions>
+        <v-btn @click="closePickingFromMultipleLists">Close</v-btn>
+        <v-btn @click="pickFromMultipleLists">Pick elements</v-btn>
     </v-card-actions>
 </v-card>
 </v-dialog>
@@ -64,6 +85,31 @@
 </script>
 
 <script type="text/javascript">
+var listMethods = {
+    closePickingFromMultipleLists(event)
+    {
+        this.isPickingFromMultipleLists = false
+        this.itemsFromMultipleLists = []
+        this.multipleSourceListIndices = []
+    },
+    pickFromMultipleLists(event)
+    {
+        this.itemsFromMultipleLists = []
+        for (var i in this.multipleSourceListIndices)
+        {
+            var li = this.multipleSourceListIndices[i]
+            var ii = Math.floor(Math.random() * this.lists[li].items.length)
+            var ri = { listIndex: li, itemIndex: ii }
+            this.itemsFromMultipleLists.push(ri)
+        }
+    },
+    proceedToPickFromMultipleLists(event)
+    {
+        this.isSelectingMultipleListsToPick = false
+        this.isPickingFromMultipleLists = true
+    },
+}
+
 var listWatch = {
     filter(value)
     {
@@ -92,16 +138,27 @@ var listComputed = {
 
         return classes.join(' ')
     },
+    multipleListText()
+    {
+        return Array.from(
+            this.multipleSourceListIndices,
+            i => this.lists[i].name,
+        ).join(', ')
+    },
 }
 const ListComponent = {
     components: { LevelOneBaseComponent },
     template: '#listTemplate',
+    delimiters: ['${', '}'],
     data() { return {
         filter: '',
         fLists: [],
         isLoading: true,
         isPickingFromMultipleLists: false,
+        isSelectingMultipleListsToPick: false,
+        itemsFromMultipleLists: [],
         lists: [],
+        multipleSourceListIndices: [],
     }},
     mounted()
     {
@@ -111,6 +168,7 @@ const ListComponent = {
             this.isLoading = false
         })
     },
+    methods: listMethods,
     computed: listComputed,
     watch: listWatch,
 }

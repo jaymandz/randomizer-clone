@@ -199,15 +199,7 @@ var listViewMethods = {
     },
     selectSomeItems(count)
     {
-        var selectedItems = []
-        var tempItems = _.clone(this.list.items)
-        for (var i = 0; i < count; i++)
-        {
-            var index = Math.floor(Math.random() * tempItems.length)
-            selectedItems.push(tempItems[index].body)
-            tempItems.splice(index, 1)
-        }
-        return selectedItems
+        return this.$root.selectSomeItemsInList(this.list, count)
     },
     shuffleItems(event)
     {
