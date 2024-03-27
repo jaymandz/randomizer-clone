@@ -159,9 +159,9 @@ var listFormMethods = {
         this.isCreatedListEmpty = this.formData.items.length == 0
         if (this.isCreatedListEmpty) return
 
-        axios.post(
-            '{{ url_for("add_list") }}',
-            this.formData,
+        this.$root.createListFromData(
+            this.formData.name,
+            this.formData.items
         ).then(r => {
             this.$router.replace('/list')
         })

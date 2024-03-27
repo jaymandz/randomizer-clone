@@ -164,6 +164,10 @@ if (Cookies.get('randomizer.screenName') === undefined) Cookies.set(
 )
 
 var appMethods = {
+    async createListFromData(name, items)
+    {
+        return await axios.post('{{ url_for("add_list") }}', { name, items })
+    },
     selectSomeItemsInList(list, count)
     {
         var selectedItems = []

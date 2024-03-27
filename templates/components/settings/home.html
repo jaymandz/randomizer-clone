@@ -19,7 +19,7 @@
             Number
         </v-list-item-subtitle>
     </v-list-item>
-    <v-list-item>
+    <v-list-item @click="isShowingListsImportDialog = true">
         <template #prepend>
             <v-icon icon="mdi-application-import"></v-icon>
         </template>
@@ -66,6 +66,22 @@
 </v-card-actions>
 </v-card>
 </v-dialog>
+
+<v-dialog v-model="isShowingListsImportDialog">
+<v-card title="Import lists">
+<v-card-text>
+    <form id="importForm" @submit.prevent="importLists">
+        <v-file-input v-model="importForm.json_file" required
+          accept="application/json" label="Upload backup file here.">
+        </v-file-input>
+    </form>
+</v-card-text>
+<v-card-actions>
+    <v-btn @click="isShowingListsImportDialog = false">Close</v-btn>
+    <v-btn form="importForm" type="submit">Import</v-btn>
+</v-card-actions>
+</v-card>
+</v-dialog>
 </template>
 
 </RootBaseComponent>
@@ -74,12 +90,28 @@
 
 <script type="text/javascript">
 var settingsMethods = {
+    async addListsFromJson(lj)
+    {
+        var lists = JSON.parse(lj)
+        for (var name in lists)
+        {
+            var items = Array.from(lists[name], i => ({ body: i }))
+            await this.$root.createListFromData(name, items)
+        }
+    },
     exportLists(event)
     {
         axios.get('{{ url_for("get_all_lists") }}').then(r => {
             var lj = JSON.stringify(this.listsDictFromDbData(r.data))
             var blob = new Blob([lj], { type: 'text/plain; charset=utf-8' })
             saveAs(blob, 'backup_'+luxon.DateTime.now().toISODate()+'.json')
+        })
+    },
+    importLists(event)
+    {
+        this.importForm.json_file[0].text().then(r => {
+            this.addListsFromJson(r)
+            this.isShowingListsImportDialog = false
         })
     },
     listsDictFromDbData(data)
@@ -109,10 +141,14 @@ const SettingsComponent = {
     },
     template: '#settingsTemplate',
     data() { return {
+        importForm: {
+            json_file: null,
+        },
         settingsForm: {
             screen_name: Cookies.get('randomizer.screenName'),
         },
         isShowingInitialScreenSelectDialog: false,
+        isShowingListsImportDialog: false,
     }},
     methods: settingsMethods,
 }
